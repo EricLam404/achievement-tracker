@@ -17,7 +17,7 @@ function App() {
     return (
         <div className="App">
         <div className='header'>Achievement Tracker</div>
-        <Class student_class={studentData}/>
+        <Class student_class={studentData[0]}/>
         </div>
     );
 }

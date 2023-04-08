@@ -1,15 +1,18 @@
 import React, { useEffect, useState} from 'react';
 import './App.css';
 import Class from './components/Class';
+import Schedule from './components/Schedule';
 
 function App() {
-    const [studentData, setStudentData] = useState({});
+    const [scheduleData, setScheduleData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('/student');
             const jsonData = await response.json();
-            setStudentData(jsonData);
+            setScheduleData(jsonData);
+            console.log("APP");
+            console.log(jsonData);
         };
         
         fetchData();    
@@ -17,7 +20,7 @@ function App() {
     return (
         <div className="App">
         <div className='header'>Achievement Tracker</div>
-        <Class student_class={studentData[0]}/>
+        <Schedule schedule={scheduleData}/>
         </div>
     );
 }

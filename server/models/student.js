@@ -6,20 +6,11 @@ const classSchema = require('./class');
 const timeSchema = require('./time');
 
 const studentSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  dob: {type: String,},
+  name: {type: String, required: true},
+  email: {type: String, required: true},
+  dob: {type: String},
   age: {type: Number},
-  phone: {
-    type: String,
-    required: true
-  },
+  phone: {ype: String, required: true},
   address: {type: String},
   started: {type: Date, default: Date.now},
   days: [

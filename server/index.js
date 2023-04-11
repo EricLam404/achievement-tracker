@@ -1,6 +1,97 @@
 const express = require('express');
+const mongoose = require('mongoose');
+
+const Student = require('./models/student');
+const Time = require('./models/time');
+const Class = require('./models/class');
+
+require('dotenv').config();
+mongoose.set('strictQuery', false);
 
 const app = express();
+
+const mongoDB = process.env.DatabaseLogin;
+
+async function main() {
+    try {
+        await mongoose.connect(mongoDB);
+        console.log('Database connected successfully!');
+    } catch (err) {
+        console.log('Error connecting to database:', err);
+    }
+}
+  
+main();
+
+
+const student = new Student({
+    name: 'John',
+    email: 'john@example.com',
+    dob: '2000-01-01',
+    age: 23,
+    phone: '555-1234',
+    address: '123 Main St, Anytown USA',
+    started: new Date(),
+    days: [
+      {
+        time: {
+          day: 'Monday',
+          time: '10:00am'
+        }
+      },
+      {
+        time: {
+          day: 'Wednesday',
+          time: '2:00pm'
+        }
+      }
+    ],
+    classes: {
+      robotics: [
+        {
+          class: {
+            classNumber: 1,
+            classDate: new Date(),
+            classAchievement: 'Completed robot building project',
+            classLevel: 'Level 1',
+            classLesson: 'Advanced robotics programming'
+          }
+        }
+      ],
+      electronics: [
+        {
+          class: {
+            classNumber: 1,
+            classDate: new Date(),
+            classAchievement: 'Completed circuit design project',
+            classLevel: 'Level 1',
+            classLesson: 'Advanced electronics programming'
+          }
+        }
+      ],
+      coding: [
+        {
+          class: {
+            classNumber: 1,
+            classDate: new Date(),
+            classAchievement: 'Completed coding challenge',
+            classLevel: 'Level 2',
+            classLesson: 'Introduction to web development'
+          }
+        }
+      ]
+    }
+});
+  
+student.save((err) => {
+    if (err) {
+      console.error(err);
+      return handleError(err);
+    } else {
+      console.log('Student saved successfully!');
+    }
+    mongoose.disconnect();
+});
 
 const api = API();
 
@@ -9,6 +100,8 @@ app.get("/student", (req, res) => {
 })
 
 app.listen(5001, () => {console.log("Server started on port 5001")});
+
+
 /*
 
 app.use(express.static("../client/build"));
@@ -17,6 +110,8 @@ const PORT = process.env.PORT || 5001;
 
 app.listen(PORT);
 */
+
+
 
 function API(){
     return [

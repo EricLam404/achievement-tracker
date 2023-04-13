@@ -1,0 +1,11 @@
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.week-list {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

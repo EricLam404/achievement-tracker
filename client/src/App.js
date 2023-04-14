@@ -1,6 +1,5 @@
 import React, { useEffect, useState} from 'react';
 import './App.css';
-import Class from './components/Class';
 import Schedule from './components/Schedule';
 
 function App() {

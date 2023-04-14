@@ -3,7 +3,7 @@ import "../styles/Schedule.css";
 
 function Schedule({schedule}) {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    console.log(schedule ? schedule : "loading");
+    //console.log(schedule ? schedule : "loading");
     return (
         <div className="schedule-list">
             <div className='name'>Student List</div>
@@ -13,7 +13,6 @@ function Schedule({schedule}) {
                         const filteredData = schedule.filter(student => {
                             return student.days.some(days => days.day === day);
                         });
-                        console.log(filteredData);
                         return (
                         <div className='week' key={index}>
                             <div className='day-of-week' key={index}>{day}</div>

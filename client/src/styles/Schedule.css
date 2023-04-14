@@ -7,9 +7,12 @@
 .week-list {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
 }
 
+.day-of-week {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
 ul {
     margin: 0px;
     padding: 0px;

@@ -9,3 +9,8 @@
     justify-content: space-evenly;
     align-items: center;
 }
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}

@@ -2,81 +2,39 @@ import React, { useEffect, useState} from 'react';
 import "../styles/Schedule.css";
 
 function Schedule({schedule}) {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    console.log(schedule ? schedule : "loading");
     return (
         <div className="schedule-list">
             <div className='name'>Student List</div>
-            {schedule ? (
-                <div className='week-list'>
-                    <div className='monday'>
-                        <div className='day-of-week'>Monday</div>
-                        <ul>
-                            {
-                                const mondayStudents = schedule.filter()
-                            }
-                        </ul>
-                    </div>
-                    <div className='tuesday'>
-                        <div className='day-of-week'>Tuesday</div>
-                        <ul>
-
-                        </ul>
-                    </div>
-                    <div className='wednesday'>
-                        <div className='day-of-week'>Wednesday</div>
-                        <ul>
-
-                        </ul>
-                    </div>
-                    <div className='thursday'>
-                        <div className='day-of-week'>Thursday</div>
-                        <ul>
-
-                        </ul>
-                    </div>
-                    <div className='friday'>
-                        <div className='day-of-week'>Friday</div>
-                        <ul>
-
-                        </ul>
-                    </div>
-                    <div className='saturday'>
-                        <div className='day-of-week'>Saturday</div>
-                        <ul>
-
-                        </ul>
-                    </div>
-                    <div className='sunday'>
-                        <div className='day-of-week'>Sunday</div>
-                        <ul>
-
-                        </ul>
-                    </div>
-                </div>
-            ) :
-            (
-                <div>loading students</div>
-            )}
+            <div className='week-list'>
+                {schedule ? (
+                    days.map((day, index) => {
+                        const filteredData = schedule.filter(student => {
+                            return student.days.some(days => days.day === day);
+                        });
+                        console.log(filteredData);
+                        return (
+                        <div className='week' key={index}>
+                            <div className='day-of-week' key={index}>{day}</div>
+                            <ul>
+                                {
+                                    filteredData.map((student, index) => {
+                                        return (
+                                            <div className='name' key={index}>{student.name}</div>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                    )})
+                ) :
+                (
+                    <div>loading students</div>
+                )}
+            </div>
         </div>
     );
 }
 
 export default Schedule;
-
-/*
-<ul>
-                    {schedule.map((item, index) => (
-                        <li className='time' key={index}>
-                        <div className='class-block'>
-                            <div className='class-time'>{item.time}</div>
-                            <ul>
-                                {item.students.map((student, index) => (
-                                    <div className='student-name' key={student.name}>
-                                        {student.name}
-                                    </div>
-                                ))}
-                            </ul>
-                        </div>
-                    </li>
-                    ))}
-                </ul>
-                */

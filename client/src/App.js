@@ -11,8 +11,7 @@ function App() {
             const response = await fetch('/student');
             const jsonData = await response.json();
             setScheduleData(jsonData);
-            console.log("APP");
-            console.log(jsonData);
+            //console.log(jsonData);
         };
         
         fetchData();    

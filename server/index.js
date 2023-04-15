@@ -7,6 +7,7 @@ require('dotenv').config();
 mongoose.set('strictQuery', false);
 
 const app = express();
+app.use(express.json());
 
 const mongoDB = process.env.DatabaseLogin;
 
@@ -30,6 +31,28 @@ app.get("/student", (req, res) => {
         res.json(students);
     });
 })
+
+app.post('/add-class/robotics', async (req, res) => {
+    const { id, classNumber, classDate, classAchievement, classLesson } = req.body;
+    Student.findOneAndUpdate({_id: id},
+        {$push: {
+            'classes.robotics': {
+                classNumber: classNumber,
+                classDate: classDate,
+                classAchievement: classAchievement,
+                classLesson: classLesson
+            }
+        }},
+        (err, doc) =>{
+            if (err) {
+                console.log(err);
+                res.status(500).send('Error while adding class!');
+              } else {
+                res.send(doc);
+              }
+        }
+    );
+});
 
 app.listen(5001, () => {console.log("Server started on port 5001")});
 

@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "../styles/Class.css";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import PopupForm from './PopupForm';
 
 function Class() {
     const location = useLocation();
     const name = location.state?.class;
-    const classes = location.state?.classes;
-    console.log(classes);
+    const [classes, setClasses] = useState(location.state?.classes);
+
+    function handleClasses(newClasses){
+        setClasses(newClasses);
+    }
+    
     return (
         <div className="class">
             <div className='class-type'>{"Class: " + name}</div>
@@ -31,6 +36,7 @@ function Class() {
             (
                 <div>No class achievements</div>
             )}
+            <PopupForm _class={name} classNumber={classes?.length} handleClasses={handleClasses}/>
         </div>
     );
 }

@@ -5,7 +5,7 @@ function Student() {
     const location = useLocation();
     const student = location.state?.student;
     const classes = student?.classes;
-    console.log(classes);
+    //console.log(classes);
     
     return (
         <div className="student-list">

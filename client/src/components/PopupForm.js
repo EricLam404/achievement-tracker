@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/PopupForm.css';
 
-function PopupForm({ _class, classNumber, handleClasses }) {
+function PopupForm({ _class, classNumber }) {
     const [showPopup, setShowPopup] = useState(false);
     const [classDate, setClassDate] = useState('');
     const [classAchievement, setClassAchievement] = useState('');

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import "../styles/Class.css";
 import { useLocation } from "react-router-dom";
 import PopupForm from './PopupForm';
@@ -6,12 +6,8 @@ import PopupForm from './PopupForm';
 function Class() {
     const location = useLocation();
     const name = location.state?.class;
-    const [classes, setClasses] = useState(location.state?.classes);
+    const classes = location.state?.classes;
 
-    function handleClasses(newClasses){
-        setClasses(newClasses);
-    }
-    
     return (
         <div className="class">
             <div className='class-type'>{"Class: " + name}</div>

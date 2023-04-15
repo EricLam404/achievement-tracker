@@ -32,7 +32,7 @@ function Class() {
             (
                 <div>No class achievements</div>
             )}
-            <PopupForm _class={name} classNumber={classes?.length} handleClasses={handleClasses}/>
+            <PopupForm _class={name} classNumber={classes?.length}/>
         </div>
     );
 }

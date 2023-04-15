@@ -1,5 +1,6 @@
 import React from 'react';
 import "../styles/Schedule.css";
+import { Link } from 'react-router-dom';
 
 function Schedule({schedule}) {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -35,7 +36,9 @@ function Schedule({schedule}) {
                                                 <div className='students'>
                                                     {students.map((student, index) => {
                                                         return (
-                                                            <div className='name' key={index}>{student.name}</div>
+                                                            <Link key={index} to={`/student/${student._id}`} state={{ student: student }}>
+                                                                <div className='student-name'>{student.name}</div>
+                                                            </Link>
                                                         )
                                                     })}
                                                 </div>

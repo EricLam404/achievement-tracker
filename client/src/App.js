@@ -1,25 +1,16 @@
-import React, { useEffect, useState} from 'react';
-import './App.css';
-import Schedule from './components/Schedule';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from "./components/Home";
+import Student from "./components/Student";
+import Class from "./components/Class";
 
 function App() {
-    const [scheduleData, setScheduleData] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch('/student');
-            const jsonData = await response.json();
-            setScheduleData(jsonData);
-            //console.log(jsonData);
-        };
-        
-        fetchData();    
-    }, []);
     return (
-        <div className="App">
-        <div className='header'>Achievement Tracker</div>
-        <Schedule schedule={scheduleData}/>
-        </div>
+        <Routes>
+            <Route path="/" element={<Home/>}></Route>
+            <Route path="/student/:id" element={<Student />} />
+            <Route path="/student/:id/class/:class" element={<Class />} />
+        </Routes>
     );
 }
 

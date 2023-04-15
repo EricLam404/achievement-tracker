@@ -1,32 +1,29 @@
 import React from 'react';
+import { Link, useLocation } from "react-router-dom";
 
-function Schedule({schedule}) {
+function Student() {
+    const location = useLocation();
+    const student = location.state?.student;
+    const classes = student?.classes;
+    console.log(classes);
+    
     return (
         <div className="student-list">
-            <div className='name'>Student List</div>
-            {schedule ? (
-                <ul>
-                    {schedule.map((item, index) => (
-                        <li className='time' key={index}>
-                        <div className='class-block'>
-                            <div className='class-time'>{item.time}</div>
-                            <ul>
-                                {item.students.map((student, index) => (
-                                    <div className='student-name' key={student.name}>
-                                        {student.name}
-                                    </div>
-                                ))}
-                            </ul>
-                        </div>
-                    </li>
-                    ))}
-                </ul>
-            ) :
-            (
-                <div>loading students</div>
-            )}
+            <div className='class-list'>Class List</div>
+            <ul>
+                <Link to="class/electronics" state={{ class: "electronics", classes: classes.electronics }}>
+                    <div>Electronics</div>
+                </Link>
+                <Link to="class/robotics" state={{ class: "robotics", classes: classes.robotics }}>
+                    <div>Robotics</div>
+                </Link>
+                <Link to="class/coding" state={{ class: "coding", classes: classes.coding }}>
+                    <div>Coding</div>
+                </Link>
+            </ul>
+            
         </div>
     );
 }
 
-export default Schedule;
+export default Student;

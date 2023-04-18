@@ -54,6 +54,25 @@ app.post('/add-class/robotics', async (req, res) => {
     );
 });
 
+app.delete('/delete-class/robotics', async (req, res) => {
+    const { studentId, classId } = req.body;
+    Student.findOneAndUpdate({_id: studentId},
+        {$pull: {
+            'classes.robotics': {
+                _id: classId
+            }
+        }},
+        (err, doc) =>{
+            if (err) {
+                console.log(err);
+                res.status(500).send('Error while deleting class!');
+              } else {
+                res.send(doc);
+              }
+        }
+    );
+});
+
 app.listen(5001, () => {console.log("Server started on port 5001")});
 
 function createStudent(name, day, time){

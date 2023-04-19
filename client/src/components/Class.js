@@ -3,6 +3,7 @@ import "../styles/Class.css";
 import { useLocation } from "react-router-dom";
 import PopupForm from './PopupForm';
 import Delete from './Delete';
+import Back from './Back';
 
 function Class() {
     const location = useLocation();
@@ -36,6 +37,7 @@ function Class() {
                 <div>No class achievements</div>
             )}
             <PopupForm _class={name} classNumber={classes?.length}/>
+            <Back/>
         </div>
     );
 }

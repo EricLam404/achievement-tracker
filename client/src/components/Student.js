@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from "react-router-dom";
+import Back from './Back';
 
 function Student() {
     const location = useLocation();
@@ -21,7 +22,7 @@ function Student() {
                     <div>Coding</div>
                 </Link>
             </ul>
-            
+            <Back/>
         </div>
     );
 }

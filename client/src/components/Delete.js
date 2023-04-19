@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function Delete({_class}) {
-    const { id } = useParams();
+function Delete({_id, _class}) {
+    const [showDelete, setShowDelete] = useState(false);
     const navigate = useNavigate();
+    const { id } = useParams();
 
     function deleteClass(){
+        console.log("fetch")
         fetch(`/delete-class/${_class}`, {
             method: 'DELETE',
             body: JSON.stringify({
-                id: id
+                studentId: id,
+                classId: _id
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +36,20 @@ function Delete({_class}) {
 
     return (
         <div>
-
+        <button onClick={() => setShowDelete(true)}>Delete Class</button>
+        {showDelete && (
+            <div className="popup-container">
+            <div className="popup">
+                <h2>Delete Class</h2>
+                <div className="button-container">
+                    <button type="submit" onClick={deleteClass}>Delete Class</button>
+                    <button type="button" onClick={() => setShowDelete(false)}>
+                    Cancel
+                    </button>
+                </div>
+            </div>
+            </div>
+        )}
         </div>
     );
 }

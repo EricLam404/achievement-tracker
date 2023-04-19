@@ -66,9 +66,9 @@ app.delete('/delete-class/robotics', async (req, res) => {
             if (err) {
                 console.log(err);
                 res.status(500).send('Error while deleting class!');
-              } else {
+            } else {
                 res.send(doc);
-              }
+            }
         }
     );
 });

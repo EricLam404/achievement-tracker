@@ -2,11 +2,13 @@ import React from 'react';
 import "../styles/Class.css";
 import { useLocation } from "react-router-dom";
 import PopupForm from './PopupForm';
+import Delete from './Delete';
 
 function Class() {
     const location = useLocation();
     const name = location.state?.class;
     const classes = location.state?.classes;
+    
 
     return (
         <div className="class">
@@ -25,6 +27,7 @@ function Class() {
                         <div className='class-date'>{item.classDate}</div>
                         <div className='class-achievement'>{item.classAchievement}</div>
                         <div className='class-lesson'>{item.classLesson}</div>
+                        <Delete _id={item._id} _class={name}/>
                     </li>
                 ))}
             </ul>

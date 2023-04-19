@@ -20,6 +20,7 @@ function PopupForm({ _class, classNumber }) {
                 classDate: classDate,
                 classAchievement: classAchievement,
                 classLesson: classLesson,
+                classType: _class
             }),
             headers: {
                 'Content-Type': 'application/json',

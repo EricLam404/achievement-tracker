@@ -32,24 +32,30 @@ app.get("/student", (req, res) => {
     });
 })
 
-app.post('/add-class/robotics', async (req, res) => {
-    const { id, classNumber, classDate, classAchievement, classLesson } = req.body;
+app.post('/add-class/:classType', async (req, res) => {
+    const { id, classNumber, classDate, classAchievement, classLesson, classType } = req.body;
+    const classTypes = ['electronics', 'robotics', 'coding'];
+
+    if(!classTypes.includes(classType)){
+        res.status(400).send('Invalid class type!');
+        return;
+    }
+    const update = {};
+    update[`classes.${classType}`] = {
+        classNumber: classNumber,
+        classDate: classDate,
+        classAchievement: classAchievement,
+        classLesson: classLesson
+    };
     Student.findOneAndUpdate({_id: id},
-        {$push: {
-            'classes.robotics': {
-                classNumber: classNumber,
-                classDate: classDate,
-                classAchievement: classAchievement,
-                classLesson: classLesson
-            }
-        }},
+        {$push: update},
         (err, doc) =>{
             if (err) {
                 console.log(err);
                 res.status(500).send('Error while adding class!');
-              } else {
+            } else {
                 res.send(doc);
-              }
+            }
         }
     );
 });

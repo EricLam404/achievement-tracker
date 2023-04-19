@@ -24,7 +24,7 @@ function Class() {
                 {classes.map((item, index) => (
                     <li className='class' key={index}>
                         <div className='class-number'>{item.classNumber}</div>
-                        <div className='class-date'>{item.classDate}</div>
+                        <div className='class-date'>{item.classDate.substring(0, 10)}</div>
                         <div className='class-achievement'>{item.classAchievement}</div>
                         <div className='class-lesson'>{item.classLesson}</div>
                         <Delete _id={item._id} _class={name}/>

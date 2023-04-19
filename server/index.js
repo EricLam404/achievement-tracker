@@ -67,7 +67,26 @@ app.delete('/delete-class/robotics', async (req, res) => {
                 console.log(err);
                 res.status(500).send('Error while deleting class!');
             } else {
-                res.send(doc);
+                res.send(doc.classes.robotics);
+            }
+        }
+    );
+});
+
+app.delete('/delete-time', async (req, res) => {
+    const { studentId, timeId } = req.body;
+    Student.findOneAndUpdate({_id: studentId},
+        {$pull: {
+            'days': {
+                _id: timeId
+            }
+        }},
+        (err, doc) =>{
+            if (err) {
+                console.log(err);
+                res.status(500).send('Error while deleting time!');
+            } else {
+                res.send(doc.days);
             }
         }
     );

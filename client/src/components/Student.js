@@ -30,7 +30,7 @@ function Student() {
                     <li key={index}>
                         <div className='day'>{time.day}</div>
                         <div className='time'>{time.time}</div>
-                        <Delete />
+                        <Delete _id={time._id} _name="time"/>
                     </li>
                 ))}
             </ul>

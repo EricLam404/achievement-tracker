@@ -28,7 +28,7 @@ function Class() {
                         <div className='class-date'>{item.classDate.substring(0, 10)}</div>
                         <div className='class-achievement'>{item.classAchievement}</div>
                         <div className='class-lesson'>{item.classLesson}</div>
-                        <Delete _id={item._id} _class={name}/>
+                        <Delete _id={item._id} _name={name}/>
                     </li>
                 ))}
             </ul>

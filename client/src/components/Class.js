@@ -1,19 +1,18 @@
 import React from 'react';
 import "../styles/Class.css";
-import { useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import PopupForm from './PopupForm';
 import Delete from './Delete';
 import Back from './Back';
 
 function Class() {
     const location = useLocation();
-    const name = location.state?.class;
-    const classes = location.state?.classes;
-    
+    const classes = location.state;
+    const {_class} = useParams();
 
     return (
         <div className="class">
-            <div className='class-type'>{"Class: " + name}</div>
+            <div className='class-type'>{"Class: " + _class}</div>
             {classes ? (
                 <ul className='class-list'>
                 <li className='class' key="header">
@@ -28,7 +27,7 @@ function Class() {
                         <div className='class-date'>{item.classDate.substring(0, 10)}</div>
                         <div className='class-achievement'>{item.classAchievement}</div>
                         <div className='class-lesson'>{item.classLesson}</div>
-                        <Delete _id={item._id} _name={name}/>
+                        <Delete _id={item._id} _name={_class}/>
                     </li>
                 ))}
             </ul>
@@ -36,7 +35,7 @@ function Class() {
             (
                 <div>No class achievements</div>
             )}
-            <PopupForm _class={name} classNumber={classes?.length}/>
+            <PopupForm _class={_class} classNumber={classes?.length}/>
             <Back/>
         </div>
     );

@@ -8,21 +8,18 @@ function Student() {
     const student = location.state?.student;
     const classes = student?.classes;
     const time = student?.days;
+    const classNames = ['electronics', 'robotics', 'coding'];
     //console.log(classes);
     
     return (
         <div className="student-list">
             <div className='class-list'>Class List</div>
             <ul>
-                <Link to="class/electronics" state={{ class: "electronics", classes: classes.electronics }}>
-                    <div>Electronics</div>
-                </Link>
-                <Link to="class/robotics" state={{ class: "robotics", classes: classes.robotics }}>
-                    <div>Robotics</div>
-                </Link>
-                <Link to="class/coding" state={{ class: "coding", classes: classes.coding }}>
-                    <div>Coding</div>
-                </Link>
+                {classNames.map((_class, index) => (
+                    <Link to={`class/${_class}`} state={classes[_class]} key={index}>
+                        <div>{_class[0].toUpperCase() + _class.substring(1)}</div>
+                    </Link>
+                ))}
             </ul>
             <div className='time-list'>Time List</div>
             <ul>

@@ -80,6 +80,20 @@ app.post('/add-time', async (req, res) => {
     );
 });
 
+app.post('/add-student', async (req, res) => {
+    const { 
+        name,
+        email,
+        dob,
+        age,
+        phone,
+        address,
+        started,
+        days } = req.body;
+
+    console.log(req.body);
+});
+
 app.delete('/delete-class/robotics', async (req, res) => {
     const { studentId, classId } = req.body;
     Student.findOneAndUpdate({_id: studentId},

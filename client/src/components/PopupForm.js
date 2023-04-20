@@ -2,20 +2,33 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/PopupForm.css';
 
-function PopupForm({ classNumber }) {
+function PopupForm({ classNumber, addStudent }) {
+    const classNames = ['electronics', 'robotics', 'coding'];
+    const {_class} = useParams();
+
+    //id and return
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const addClass = classNames.includes(_class);
+    //class
     const [showPopup, setShowPopup] = useState(false);
     const [classDate, setClassDate] = useState('');
     const [classAchievement, setClassAchievement] = useState('');
     const [classLesson, setClassLesson] = useState('');
 
-    const classNames = ['electronics', 'robotics', 'coding'];
-    const {_class} = useParams();
-    const addClass = classNames.includes(_class);
+    //time
     const [day, setDay] = useState('');
     const [time, setTime] = useState('');
 
-    const { id } = useParams();
-    const navigate = useNavigate();
+    //student
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [dob, setDob] = useState('');
+    const [age, setAge] = useState(6);
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [started, setStarted] = useState(Date.now);
 
     const newClass = {
         id: id,
@@ -32,11 +45,30 @@ function PopupForm({ classNumber }) {
         time: time
     };
 
+    const newStudent = {
+        name: name,
+        email: email,
+        dob: dob,
+        age: age,
+        phone: phone,
+        address: address,
+        started: started,
+        days: [{
+            day: day,
+            time: time
+        }],
+        classes: {
+            robotics: [],
+            electronics: [],
+            coding: [],
+        }
+    }   
+
     function handleSubmit(event) {
         event.preventDefault();
 
-        const url = addClass ? `/add-class/${_class}` : "/add-time";
-        const body = addClass ?  newClass : newTime;
+        const url = addClass ? `/add-class/${_class}` : addStudent ? "/add-student" : "/add-time";
+        const body = addClass ?  newClass :  addStudent ? newStudent : newTime;
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(body),
@@ -144,14 +176,96 @@ function PopupForm({ classNumber }) {
 
         </>)
     }
+    function studentPopup(){
+        return (<>
+            <h2>Add New Student</h2>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="name">Student Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    required
+                />
+                <label htmlFor="email">Email:</label>
+                <input
+                    type="text"
+                    id="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                />
+                <label htmlFor="dob">Date of birth:</label>
+                <input
+                    type="text"
+                    id="dob"
+                    value={dob}
+                    onChange={(event) => setDob(event.target.value)}
+                />
+                <label htmlFor="age">Age:</label>
+                <input
+                    type="text"
+                    id="age"
+                    value={age}
+                    onChange={(event) => setAge(event.target.value)}
+                />
+                <label htmlFor="phone">Phone Number:</label>
+                <input
+                    type="text"
+                    id="phone"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                    required
+                />
+                <label htmlFor="address">Address:</label>
+                <input
+                    type="text"
+                    id="address"
+                    value={address}
+                    onChange={(event) => setAddress(event.target.value)}
+                    required
+                />
+                <label htmlFor="started">Started:</label>
+                <input
+                    type="Date"
+                    id="started"
+                    value={started}
+                    onChange={(event) => setStarted(event.target.value)}
+                    required
+                />
+                <label htmlFor="day">Day:</label>
+                <input
+                    type="text"
+                    id="day"
+                    value={day}
+                    onChange={(event) => setDay(event.target.value)}
+                    required
+                />
+                <label htmlFor="time">Time:</label>
+                <input
+                    type="text"
+                    id="time"
+                    value={time}
+                    onChange={(event) => setTime(event.target.value)}
+                    required
+                />
+
+                <div className="button-container">
+                    <button type="submit">Add New Student</button>
+                    <button type="button" onClick={handleCancel}>Cancel</button>
+                </div>
+            </form>
+            </>
+        )
+    }
 
     return (
         <div>
-        <button onClick={() => setShowPopup(true)}>Add {addClass ? "Class" : "Time"}</button>
+        <button onClick={() => setShowPopup(true)}>Add {addClass ? "Class" : addStudent ? "Student" : "Time"}</button>
         {showPopup && (
             <div className="popup-container">
             <div className="popup">
-                {addClass ? classPopup() : timePopup()}
+                {addClass ? classPopup() : addStudent ? studentPopup() : timePopup()}
             </div>
             </div>
         )}

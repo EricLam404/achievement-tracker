@@ -1,6 +1,7 @@
 import React from 'react';
 import "../styles/Schedule.css";
 import { Link } from 'react-router-dom';
+import PopupForm from './PopupForm';
 
 function Schedule({schedule}) {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -53,6 +54,7 @@ function Schedule({schedule}) {
                 (
                     <div>loading students</div>
                 )}
+                <PopupForm addStudent={true}/>
             </div>
         </div>
     );

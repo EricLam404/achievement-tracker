@@ -78,7 +78,7 @@ function PopupForm({ classNumber, addStudent }) {
         })
         .then((response) => response.text())
         .then((message) => {
-            console.log(message);
+            //console.log(message);
             if(addStudent) window.location.reload();
             else navigate('/');
 

@@ -31,7 +31,6 @@ app.get("/student", (req, res) => {
         res.json(students);
     });
 })
-
 app.post('/add-class/:classType', async (req, res) => {
     const { id, classNumber, classDate, classAchievement, classLesson, classType } = req.body;
     const classTypes = ['electronics', 'robotics', 'coding'];
@@ -89,7 +88,30 @@ app.post('/add-student', async (req, res) => {
         phone,
         address,
         started,
-        days } = req.body;
+        days,
+        classes 
+    } = req.body;
+
+    const student = new Student({
+        name: name,
+        email: email,
+        dob: dob,
+        age: age,
+        phone: phone,
+        address: address,
+        started: started,
+        days: days,
+        classes: classes
+    });
+    student.save((err, doc) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error while creating student!');
+        } else {
+            res.send(doc.classes.robotics);
+            console.log('Student saved successfully!');
+        }
+    });
 
     console.log(req.body);
 });
@@ -133,61 +155,3 @@ app.delete('/delete-time', async (req, res) => {
 });
 
 app.listen(5001, () => {console.log("Server started on port 5001")});
-
-function createStudent(name, day, time){
-    const student = new Student({
-        name: name,
-        email: name + '@gmail.com',
-        dob: '01/01/2001',
-        age: 23,
-        phone: '123-123-1234',
-        address: '123 Main St, USA',
-        started: new Date(),
-        days: [
-            {
-                day: day,
-                time: time
-            },
-            {
-                day: "Saturday",
-                time: "11:00"
-            }
-        ],
-        classes: {
-        robotics: [
-            {
-            classNumber: 1,
-            classDate: new Date(),
-            classAchievement: 'Completed robotics project',
-            classLevel: 'Level 1',
-            classLesson: 'Lesson 1'
-            }
-        ],
-        electronics: [
-            {
-            classNumber: 1,
-            classDate: new Date(),
-            classAchievement: 'Completed electronic project',
-            classLevel: 'Level 1',
-            classLesson: 'Lesson 1'
-            }
-        ],
-        coding: [
-            {
-            classNumber: 1,
-            classDate: new Date(),
-            classAchievement: 'Completed coding project',
-            classLevel: 'Level 2',
-            classLesson: 'Lesson 1'
-            }
-        ]
-        }
-    });
-    student.save((err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log('Student saved successfully!');
-        }
-    });
-}

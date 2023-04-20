@@ -28,7 +28,7 @@ function PopupForm({ classNumber, addStudent }) {
     const [age, setAge] = useState(6);
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
-    const [started, setStarted] = useState(Date.now);
+    const [started, setStarted] = useState(new Date().toISOString().slice(0, 10));
 
     const newClass = {
         id: id,
@@ -79,7 +79,9 @@ function PopupForm({ classNumber, addStudent }) {
         .then((response) => response.text())
         .then((message) => {
             console.log(message);
-            navigate('/');
+            if(addStudent) window.location.reload();
+            else navigate('/');
+
             /*
             const student = JSON.parse(message);
             const classes = student.classes[_class];

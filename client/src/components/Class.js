@@ -35,7 +35,7 @@ function Class() {
             (
                 <div>No class achievements</div>
             )}
-            <PopupForm _class={_class} classNumber={classes?.length}/>
+            <PopupForm classNumber={classes?.length}/>
             <Back/>
         </div>
     );

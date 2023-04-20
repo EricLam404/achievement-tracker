@@ -60,6 +60,26 @@ app.post('/add-class/:classType', async (req, res) => {
     );
 });
 
+app.post('/add-time', async (req, res) => {
+    const { id, day, time } = req.body;
+    const update = {};
+    update[`days`] = {
+        day: day,
+        time: time
+    };
+    Student.findOneAndUpdate({_id: id},
+        {$push: update},
+        (err, doc) =>{
+            if (err) {
+                console.log(err);
+                res.status(500).send('Error while adding timeslot!');
+            } else {
+                res.send(doc);
+            }
+        }
+    );
+});
+
 app.delete('/delete-class/robotics', async (req, res) => {
     const { studentId, classId } = req.body;
     Student.findOneAndUpdate({_id: studentId},

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const Student = require('./models/student');
+const Archive = require('./models/archive');
 
 require('dotenv').config();
 mongoose.set('strictQuery', false);
@@ -32,7 +33,7 @@ app.get("/student", (req, res) => {
     });
 })
 app.post('/add-class/:classType', async (req, res) => {
-    const { id, classNumber, classDate, classAchievement, classLesson, classType } = req.body;
+    const { id, classNumber, classDate, classAchievement, classLesson, classType, classLevel } = req.body;
     const classTypes = ['electronics', 'robotics', 'coding'];
 
     if(!classTypes.includes(classType)){
@@ -44,7 +45,8 @@ app.post('/add-class/:classType', async (req, res) => {
         classNumber: classNumber,
         classDate: classDate,
         classAchievement: classAchievement,
-        classLesson: classLesson
+        classLesson: classLesson,
+        classLevel: classLevel
     };
     Student.findOneAndUpdate({_id: id},
         {$push: update},
@@ -112,8 +114,52 @@ app.post('/add-student', async (req, res) => {
             console.log('Student saved successfully!');
         }
     });
+});
 
-    console.log(req.body);
+app.delete('/archive-student', async (req, res) => {
+    const { studentId } = req.body;
+    Student.findOne({_id: studentId}, (err, deletedStudent) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error while finding student!');
+        } else {
+            const student = deletedStudent.toJSON();
+            const archiveStudent = new Archive( { student: student });
+            console.log(archiveStudent.student.classes.robotics);
+
+            archiveStudent.save((err, doc) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).send('Error while archiving student!');
+                } else {
+                    res.send(doc);
+                    console.log('Student archived successfully!');
+                }
+            });
+
+        }
+    });
+    Student.findOneAndRemove({_id: studentId}, (err, deletedStudent) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error while deleting student!');
+        } else {
+            console.log("archived and deleted student");
+        };
+    })
+});
+
+app.delete('/delete-student', async (req, res) => {
+    const { studentId } = req.body;
+    Student.findOneAndRemove({_id: studentId}, (err, deletedStudent) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error while deleting student!');
+        } else {
+            res.send(deletedStudent);
+            console.log('Student deleted!');
+        }
+    });
 });
 
 app.delete('/delete-class/robotics', async (req, res) => {

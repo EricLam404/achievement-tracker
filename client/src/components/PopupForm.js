@@ -16,6 +16,7 @@ function PopupForm({ classNumber, addStudent }) {
     const [classDate, setClassDate] = useState('');
     const [classAchievement, setClassAchievement] = useState('');
     const [classLesson, setClassLesson] = useState('');
+    const [classLevel, setClassLevel] = useState('');
 
     //time
     const [day, setDay] = useState('');
@@ -36,6 +37,7 @@ function PopupForm({ classNumber, addStudent }) {
         classDate: classDate,
         classAchievement: classAchievement,
         classLesson: classLesson,
+        classLevel: classLevel,
         classType: _class
     };
 
@@ -95,6 +97,7 @@ function PopupForm({ classNumber, addStudent }) {
         setClassDate('');
         setClassAchievement('');
         setClassLesson('');
+        setClassLevel('');
         setShowPopup(false);
     }
 
@@ -139,6 +142,14 @@ function PopupForm({ classNumber, addStudent }) {
                     id="classLesson"
                     value={classLesson}
                     onChange={(event) => setClassLesson(event.target.value)}
+                    required
+                />
+                <label htmlFor="classLevel">Class Level:</label>
+                <input
+                    type="text"
+                    id="classLevel"
+                    value={classLevel}
+                    onChange={(event) => setClassLevel(event.target.value)}
                     required
                 />
                 <div className="button-container">

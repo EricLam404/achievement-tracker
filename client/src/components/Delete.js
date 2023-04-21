@@ -6,11 +6,24 @@ function Delete({_id, _name}) {
     const navigate = useNavigate();
     const { id } = useParams();
     const classes = ['robotics', 'electronics', 'coding'];
-    const _type = classes.includes(_name) ? "Classes" : "Time";
+    const _type = classes.includes(_name) ? "Class" : _name;
 
     function deleteId(){
-        const url = _type === "Classes" ? `/delete-class/${_name}` : "/delete-time";
-        const body = _type === "Classes" ? { studentId: id, classId: _id } : { studentId: id, timeId: _id  };
+        let url = "", body = "";
+        if(_type === "Class"){
+            url = `/delete-class/${_name}`;
+            body = { studentId: id, classId: _id };
+        }
+        else if(_type === "Time"){
+            url = "/delete-time";
+            body = { studentId: id, timeId: _id  };
+        }
+        else if(_type === "Student"){
+            url = "/delete-student";
+            console.log(url);
+            body = { studentId: id};
+        }
+
         fetch(url, {
             method: 'DELETE',
             body: JSON.stringify(body),
@@ -22,12 +35,6 @@ function Delete({_id, _name}) {
         .then((message) => {
             console.log(message);
             navigate('/');
-            /*
-            const student = JSON.parse(message);
-            const classes = student.classes[_class];
-            console.log(classes);
-            handleClasses(classes);
-            */
         })
         .catch((error) => {
             console.error(error);
@@ -40,7 +47,7 @@ function Delete({_id, _name}) {
         {showDelete && (
             <div className="popup-container">
             <div className="popup">
-                <h2>Delete Class</h2>
+                <h2>Delete {_type}</h2>
                 <div className="button-container">
                     <button type="submit" onClick={deleteId}>Delete {_type}</button>
                     <button type="button" onClick={() => setShowDelete(false)}>

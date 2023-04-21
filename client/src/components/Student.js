@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import PopupForm from './PopupForm';
 import Back from './Back';
 import Delete from './Delete'
+import Archive from './Archive';
 
 function Student() {
     const location = useLocation();
@@ -29,11 +30,13 @@ function Student() {
                     <li key={index}>
                         <div className='day'>{time.day}</div>
                         <div className='time'>{time.time}</div>
-                        <Delete _id={time._id} _name="time"/>
+                        <Delete _id={time._id} _name="Time"/>
                     </li>
                 ))}
                 <PopupForm/>
             </ul>
+            <Delete _name="Student"/>
+            <Archive />
             <Back/>
         </div>
     );

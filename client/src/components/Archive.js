@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import "../styles/Archive.css"
 
 function Archive({_id}) {
     const [showArchive, setShowArchive] = useState(false);
@@ -29,7 +30,7 @@ function Archive({_id}) {
 
     return (
         <div>
-        <button onClick={() => setShowArchive(true)}>Archive Student</button>
+        <button className="archive-btn" onClick={() => setShowArchive(true)}>Archive Student</button>
         {showArchive && (
             <div className="popup-container">
             <div className="popup">

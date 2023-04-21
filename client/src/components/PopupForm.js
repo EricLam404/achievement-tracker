@@ -273,8 +273,8 @@ function PopupForm({ classNumber, addStudent }) {
     }
 
     return (
-        <div>
-        <button onClick={() => setShowPopup(true)}>Add {addClass ? "Class" : addStudent ? "Student" : "Time"}</button>
+        <div className='button-container'>
+        <button className='button' onClick={() => setShowPopup(true)}>Add {addClass ? "Class" : addStudent ? "Student" : "Time"}</button>
         {showPopup && (
             <div className="popup-container">
             <div className="popup">

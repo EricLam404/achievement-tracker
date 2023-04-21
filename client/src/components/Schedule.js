@@ -37,7 +37,7 @@ function Schedule({schedule}) {
                                                 <div className='students'>
                                                     {students.map((student, index) => {
                                                         return (
-                                                            <Link key={index} to={`/student/${student._id}`} state={{ student: student }}>
+                                                            <Link className="student-link" key={index} to={`/student/${student._id}`} state={{ student: student }}>
                                                                 <div className='student-name'>{student.name}</div>
                                                             </Link>
                                                         )

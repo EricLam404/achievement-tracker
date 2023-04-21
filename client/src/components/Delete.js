@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import "../styles/Delete.css"
 
 function Delete({_id, _name}) {
     const [showDelete, setShowDelete] = useState(false);
@@ -43,7 +44,7 @@ function Delete({_id, _name}) {
 
     return (
         <div>
-        <button onClick={() => setShowDelete(true)}>Delete {_type}</button>
+        <button className='delete-btn' onClick={() => setShowDelete(true)}>Delete {_type}</button>
         {showDelete && (
             <div className="popup-container">
             <div className="popup">

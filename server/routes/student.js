@@ -3,7 +3,12 @@ const router = require("express").Router();
 const Student = require('../models/student');
 const Archive = require('../models/archive');
 
-router.get("/student", async (req, res) => {
+router.get('/', function(req, res, next) {
+    res.render('index', { title: 'student' });
+});
+
+
+router.get("/students", async (req, res) => {
     const students = await Student.find({});
     res.status(200).json(students);
     console.log(students);

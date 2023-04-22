@@ -7,6 +7,11 @@ mongoose.set('strictQuery', false);
 const app = express();
 app.use(express.json());
 
+const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/api");
+
+app.set('view engine', 'pug');
+
 const mongoDB = process.env.DatabaseLogin;
 
 async function main() {
@@ -20,13 +25,8 @@ async function main() {
   
 main();
 
-const studentRouter = require("./routes/student");
-
-app.use("/", (req, res) => {
-    res.send('welcome to the server home page')
-})
-
-app.use("/api/students", studentRouter);
+app.use('/', indexRouter);
+app.use("/api", apiRouter);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {console.log(`Server started on port ${PORT}`)});

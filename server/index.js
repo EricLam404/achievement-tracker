@@ -14,7 +14,7 @@ const mongoDB = process.env.DatabaseLogin;
 
 async function main() {
     try {
-        await mongoose.connect(mongoDB);
+        mongoose.connect(mongoDB);
         console.log('Database connected successfully!');
     } catch (err) {
         console.log('Error connecting to database:', err);
@@ -23,14 +23,9 @@ async function main() {
   
 main();
 
-app.get("/student", (req, res) => {
-    Student.find({}, (err, students) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        res.json(students);
-    });
+app.get("/student", async (req, res) => {
+    const students = await Student.find({})
+    res.json(students);
 })
 app.post('/add-class/:classType', async (req, res) => {
     const { id, classNumber, classDate, classAchievement, classLesson, classType, classLevel } = req.body;

@@ -4,14 +4,9 @@ const Student = require('../models/student');
 const Archive = require('../models/archive');
 
 router.get("/student", async (req, res) => {
-    try {
-        const students = await Student.find({});
-        res.status(200).json(students);
-        console.log(students);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
+    const students = await Student.find({});
+    res.status(200).json(students);
+    console.log(students);
 })
 
 router.post('/add-class/:classType', async (req, res) => {

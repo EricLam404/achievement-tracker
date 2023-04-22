@@ -6,7 +6,8 @@ const Archive = require('../models/archive');
 router.get("/student", async (req, res) => {
     try {
         const students = await Student.find({});
-        res.json(students);
+        res.status(200).json(students);
+        console.log(students);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');

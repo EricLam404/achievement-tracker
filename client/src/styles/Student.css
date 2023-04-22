@@ -33,6 +33,10 @@ li {
     align-items: center;
     margin-bottom: 10px;
 }
+
+.times {
+    flex-direction: column;
+}
   
 .timeslot {
     background-color: #ffffff;
@@ -41,6 +45,12 @@ li {
     padding: 10px;
     min-width: 200px;
     justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    gap: 5px;
 }
   
 .day {
@@ -69,4 +79,12 @@ li {
 a:hover {
     background-color: #555555;
     color: #ffffff;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }

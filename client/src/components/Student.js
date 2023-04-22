@@ -27,7 +27,7 @@ function Student() {
                 ))}
             </ul>
             <div className='time-list'>Time List</div>
-            <ul>
+            <ul className='times'>
                 {time.map((time, index) => (
                     <li className="timeslot" key={index}>
                         <div className='day'>{time.day}</div>
@@ -37,8 +37,10 @@ function Student() {
                 ))}
                 <PopupForm/>
             </ul>
-            <Delete _name="Student"/>
-            <Archive />
+            <div className='buttons'>
+                <Delete _name="Student"/>
+                <Archive />
+            </div>
             <Back/>
         </div>
     );

@@ -24,9 +24,15 @@ async function main() {
 main();
 
 app.get("/student", async (req, res) => {
-    const students = await Student.find({})
-    res.json(students);
+    try {
+        const students = await Student.find({});
+        res.json(students);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 })
+
 app.post('/add-class/:classType', async (req, res) => {
     const { id, classNumber, classDate, classAchievement, classLesson, classType, classLevel } = req.body;
     const classTypes = ['electronics', 'robotics', 'coding'];

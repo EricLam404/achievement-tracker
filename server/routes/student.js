@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
-const Student = require('./models/student');
-const Archive = require('./models/archive');
+const Student = require('../models/student');
+const Archive = require('../models/archive');
 
 router.get("/student", async (req, res) => {
     try {

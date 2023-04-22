@@ -23,6 +23,10 @@ async function main() {
   
 main();
 
+app.use("/", (req, res) => {
+    res.send('welcome to the server home page')
+})
+
 app.get("/student", async (req, res) => {
     try {
         const students = await Student.find({});

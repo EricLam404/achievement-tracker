@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from "react-router-dom";
 
-import PopupForm from './PopupForm';
+import Add from './Add';
 import Back from './Back';
 import Delete from './Delete'
 import Archive from './Archive';
@@ -35,7 +35,7 @@ function Student() {
                         <Delete _id={time._id} _name="Time"/>
                     </li>
                 ))}
-                <PopupForm/>
+                <Add />
             </ul>
             <div className='buttons'>
                 <Delete _name="Student"/>

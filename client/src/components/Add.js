@@ -69,7 +69,7 @@ function PopupForm({ classNumber, addStudent }) {
     function handleSubmit(event) {
         event.preventDefault();
 
-        const url = addClass ? `/add-class/${_class}` : addStudent ? "/add-student" : "/add-time";
+        const url = "/api/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
         const body = addClass ?  newClass :  addStudent ? newStudent : newTime;
         fetch(url, {
             method: 'POST',

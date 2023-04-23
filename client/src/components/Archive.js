@@ -8,7 +8,7 @@ function Archive({_id}) {
     const { id } = useParams();
 
     function archiveId(){
-        const url = "/archive-student";
+        const url = "/api/archive/student";
         const body = { studentId: id };
 
         fetch(url, {

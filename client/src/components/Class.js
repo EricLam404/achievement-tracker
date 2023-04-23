@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/Class.css";
 import { useParams, useLocation } from "react-router-dom";
-import PopupForm from './PopupForm';
+import Add from './Add';
 import Delete from './Delete';
 import Back from './Back';
 
@@ -35,7 +35,7 @@ function Class() {
             (
                 <div>No class achievements</div>
             )}
-            <PopupForm classNumber={classes?.length}/>
+            <Add classNumber={classes?.length}/>
             <Back/>
         </div>
     );

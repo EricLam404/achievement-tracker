@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 router.delete('/student', async (req, res) => {
     const { studentId } = req.body;
     try {
-        const doc = await Student.findOneAndRemove({_id: studentId}, (err, deletedStudent));
+        const doc = await Student.findOneAndRemove({_id: studentId});
         res.send(doc);
     } catch (err) {
         console.error(err.message);

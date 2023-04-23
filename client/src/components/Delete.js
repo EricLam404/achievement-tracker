@@ -12,15 +12,15 @@ function Delete({_id, _name}) {
     function deleteId(){
         let url = "/api/student/delete/", body = "";
         if(_type === "Class"){
-            url = `class/${_name}`;
+            url += `class/${_name}`;
             body = { studentId: id, classId: _id };
         }
         else if(_type === "Time"){
-            url = "time";
+            url += "time";
             body = { studentId: id, timeId: _id  };
         }
         else if(_type === "Student"){
-            url = "student";
+            url += "student";
             console.log(url);
             body = { studentId: id};
         }

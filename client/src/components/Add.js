@@ -81,8 +81,8 @@ function PopupForm({ classNumber, addStudent }) {
         .then((response) => response.text())
         .then((message) => {
             //console.log(message);
-            //if(addStudent) window.location.reload();
-            //else navigate('/');
+            if(addStudent) window.location.reload();
+            else navigate('/');
         })
         .catch((error) => {
             console.error(error);
@@ -200,6 +200,7 @@ function PopupForm({ classNumber, addStudent }) {
                     id="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
+                    required
                 />
                 <label htmlFor="dob">Date of birth:</label>
                 <input
@@ -207,6 +208,7 @@ function PopupForm({ classNumber, addStudent }) {
                     id="dob"
                     value={dob}
                     onChange={(event) => setDob(event.target.value)}
+                    required
                 />
                 <label htmlFor="age">Age:</label>
                 <input
@@ -214,6 +216,7 @@ function PopupForm({ classNumber, addStudent }) {
                     id="age"
                     value={age}
                     onChange={(event) => setAge(event.target.value)}
+                    required
                 />
                 <label htmlFor="phone">Phone Number:</label>
                 <input

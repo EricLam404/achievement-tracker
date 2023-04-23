@@ -73,7 +73,6 @@ router.post('/student', async (req, res) => {
         days: days,
         classes: classes
     });
-    console.log(student);
     try {
         const doc = await student.save();
         res.send(doc);

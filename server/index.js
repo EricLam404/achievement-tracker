@@ -7,6 +7,15 @@ mongoose.set('strictQuery', false);
 const app = express();
 app.use(express.json());
 
+app.use(function(req, res, next) {
+    var origin = req.headers.origin;
+    if (origin === 'https://client-production-6461.up.railway.app'){
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
+
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
 

@@ -76,7 +76,7 @@ li {
     transition: all 0.3s ease-in-out;
 }
   
-a:hover {
+.class-link:hover {
     background-color: #555555;
     color: #ffffff;
 }

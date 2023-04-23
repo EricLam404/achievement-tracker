@@ -4,6 +4,7 @@ const Student = require('../models/student');
 
 const addRouter = require("./add");
 const deleteRouter = require("./delete");
+const archiveRouter = require("./archive");
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'student' });
@@ -23,5 +24,6 @@ router.get("/students", async (req, res) => {
 
 router.use('/add', addRouter);
 router.use('/delete', deleteRouter);
+router.use('/archive', archiveRouter);
 
 module.exports = router;

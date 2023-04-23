@@ -21,7 +21,6 @@ function Delete({_id, _name}) {
         }
         else if(_type === "Student"){
             url += "student";
-            console.log(url);
             body = { studentId: id};
         }
 

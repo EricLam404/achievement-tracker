@@ -10,7 +10,7 @@ function Delete({_id, _name}) {
     const _type = classes.includes(_name) ? "Class" : _name;
 
     function deleteId(){
-        let url = "/api/delete/", body = "";
+        let url = "/api/student/delete/", body = "";
         if(_type === "Class"){
             url = `class/${_name}`;
             body = { studentId: id, classId: _id };

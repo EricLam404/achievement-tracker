@@ -69,7 +69,7 @@ function PopupForm({ classNumber, addStudent }) {
     function handleSubmit(event) {
         event.preventDefault();
 
-        const url = "/api/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
+        const url = "/api/student/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
         const body = addClass ?  newClass :  addStudent ? newStudent : newTime;
         fetch(url, {
             method: 'POST',
@@ -81,15 +81,8 @@ function PopupForm({ classNumber, addStudent }) {
         .then((response) => response.text())
         .then((message) => {
             //console.log(message);
-            if(addStudent) window.location.reload();
-            else navigate('/');
-
-            /*
-            const student = JSON.parse(message);
-            const classes = student.classes[_class];
-            console.log(classes);
-            handleClasses(classes);
-            */
+            //if(addStudent) window.location.reload();
+            //else navigate('/');
         })
         .catch((error) => {
             console.error(error);

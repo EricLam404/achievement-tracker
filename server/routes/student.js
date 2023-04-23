@@ -1,7 +1,6 @@
 const router = require("express").Router();
 
 const Student = require('../models/student');
-const Archive = require('../models/archive');
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'student' });

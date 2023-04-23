@@ -1,7 +1,6 @@
 const router = require("express").Router();
 
 const Student = require('../models/student');
-const Archive = require('../models/archive');
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'add' });
@@ -23,17 +22,14 @@ router.post('/class/:classType', async (req, res) => {
         classLesson: classLesson,
         classLevel: classLevel
     };
-    Student.findOneAndUpdate({_id: id},
-        {$push: update},
-        (err, doc) =>{
-            if (err) {
-                console.log(err);
-                res.status(500).send('Error while adding class!');
-            } else {
-                res.send(doc);
-            }
-        }
-    );
+
+    try {
+        const doc = await Student.findOneAndUpdate({_id: id}, {$push: update});
+        res.send(doc);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error Adding Class');
+    }
 });
 
 router.post('/time', async (req, res) => {
@@ -43,17 +39,14 @@ router.post('/time', async (req, res) => {
         day: day,
         time: time
     };
-    Student.findOneAndUpdate({_id: id},
-        {$push: update},
-        (err, doc) =>{
-            if (err) {
-                console.log(err);
-                res.status(500).send('Error while adding timeslot!');
-            } else {
-                res.send(doc);
-            }
-        }
-    );
+
+    try {
+        const doc = await Student.findOneAndUpdate({_id: id}, {$push: update});
+        res.send(doc);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error Adding Timeslot');
+    }
 });
 
 router.post('/student', async (req, res) => {
@@ -80,15 +73,13 @@ router.post('/student', async (req, res) => {
         days: days,
         classes: classes
     });
-    student.save((err, doc) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error while creating student!');
-        } else {
-            res.send(doc.classes.robotics);
-            console.log('Student saved successfully!');
-        }
-    });
+    try {
+        const doc = await student.save();
+        res.send(doc);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error Adding Student');
+    }
 });
 
 module.exports = router;

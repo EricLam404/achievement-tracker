@@ -9,35 +9,26 @@ router.get('/', function(req, res, next) {
 
 router.delete('/student', async (req, res) => {
     const { studentId } = req.body;
-    Student.findOne({_id: studentId}, (err, deletedStudent) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error while finding student!');
-        } else {
-            const student = deletedStudent.toJSON();
-            const archiveStudent = new Archive( { student: student });
-            console.log(archiveStudent.student.classes.robotics);
+    const deletedStudent = await Student.findOne({_id: studentId});
+    const student = deletedStudent.toJSON();
+    const archiveStudent = new Archive({ student: student });
 
-            archiveStudent.save((err, doc) => {
-                if (err) {
-                    console.error(err);
-                    res.status(500).send('Error while archiving student!');
-                } else {
-                    res.send(doc);
-                    console.log('Student archived successfully!');
-                }
-            });
+    try {
+        const doc = await archiveStudent.save();
+        res.send(doc);
+        console.log('Student archived successfully!');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error while archiving student!');
+    }
 
-        }
-    });
-    Student.findOneAndRemove({_id: studentId}, (err, deletedStudent) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error while deleting student!');
-        } else {
-            console.log("archived and deleted student");
-        };
-    })
+    try {
+        await Student.findOneAndRemove({_id: studentId});
+        console.log("Archived and deleted student");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error while deleting student!');
+    }
 });
 
 module.exports = router;

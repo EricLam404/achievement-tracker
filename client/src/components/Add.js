@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../styles/PopupForm.css';
+import '../styles/Add.css';
 
 function PopupForm({ classNumber, addStudent }) {
     const classNames = ['electronics', 'robotics', 'coding'];

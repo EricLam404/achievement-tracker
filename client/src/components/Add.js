@@ -69,7 +69,7 @@ function PopupForm({ classNumber, addStudent }) {
     function handleSubmit(event) {
         event.preventDefault();
 
-        const url = "https://server-production-6461.up.railway.app//api/student/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
+        const url = "https://server-production-6461.up.railway.app/api/student/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
         const body = addClass ?  newClass :  addStudent ? newStudent : newTime;
         fetch(url, {
             method: 'POST',

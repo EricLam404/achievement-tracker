@@ -13,7 +13,7 @@ function Delete({_id, _name}) {
         let url = "/api/student/delete/", body = "";
         if(_type === "Class"){
             url += `class/${_name}`;
-            body = { studentId: id, classId: _id };
+            body = { studentId: id, classId: _id, classType: _name};
         }
         else if(_type === "Time"){
             url += "time";

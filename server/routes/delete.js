@@ -30,7 +30,7 @@ router.delete('/class/:classType', async (req, res) => {
         _id: classId
     };
     try {
-        const doc = await Student.findOneAndUpdate({_id: id}, {$pull: update});
+        const doc = await Student.findOneAndUpdate({_id: studentId}, {$pull: update});
         res.send(doc);
     } catch (err) {
         console.error(err.message);

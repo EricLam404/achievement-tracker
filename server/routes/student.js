@@ -7,7 +7,7 @@ const deleteRouter = require("./delete");
 const archiveRouter = require("./archive");
 
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'student' });
+    res.render('home', { title: 'student' });
 });
 
 

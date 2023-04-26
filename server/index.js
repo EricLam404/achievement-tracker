@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-const indexRouter = require("./routes/index");
+const indexRouter = require("./routes/home");
 const apiRouter = require("./routes/api");
 
 app.set('view engine', 'pug');

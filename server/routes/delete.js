@@ -3,7 +3,7 @@ const router = require("express").Router();
 const Student = require('../models/student');
 
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'delete' });
+    res.render('home', { title: 'delete' });
 });
 
 router.delete('/student', async (req, res) => {

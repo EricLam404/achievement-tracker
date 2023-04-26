@@ -3,7 +3,7 @@ const router = require("express").Router();
 const Student = require('../models/student');
 
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'add' });
+    res.render('home', { title: 'add' });
 });
 
 router.post('/class/:classType', async (req, res) => {

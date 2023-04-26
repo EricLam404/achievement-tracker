@@ -3,7 +3,7 @@ var router = express.Router();
 const studentRouter = require("./student");
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'api' });
+  res.render('home', { title: 'api' });
 });
 
 router.use('/student', studentRouter);

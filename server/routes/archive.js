@@ -4,7 +4,7 @@ const Student = require('../models/student');
 const Archive = require('../models/archive');
 
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'archive' });
+    res.render('home', { title: 'archive' });
 });
 
 router.delete('/student', async (req, res) => {

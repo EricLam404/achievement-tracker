@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
     res.render('home', { title: 'archive' });
 });
 
-router.delete('/student', async (req, res) => {
+router.put('/student', async (req, res) => {
     const { studentId } = req.body;
     const deletedStudent = await Student.findOne({_id: studentId});
     const student = deletedStudent.toJSON();

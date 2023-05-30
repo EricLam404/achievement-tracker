@@ -11,8 +11,9 @@ app.use(function(req, res, next) {
     var origin = req.headers.origin;
     if (origin === 'https://client-production-6461.up.railway.app' || "http://localhost:3000/"){
         res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     }
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
 

@@ -8,7 +8,7 @@ function Archive({_id}) {
     const { id } = useParams();
 
     function archiveId(){
-        const url = "https://server-production-6461.up.railway.app/api/student/archive/student";
+        const url = "http://localhost:5001/api/student/archive/student";
         const body = { studentId: id };
 
         fetch(url, {

@@ -13,7 +13,7 @@ function PopupForm({ classNumber, addStudent }) {
     const addClass = classNames.includes(_class);
     //class
     const [showPopup, setShowPopup] = useState(false);
-    const [classDate, setClassDate] = useState('');
+    const [classDate, setClassDate] = useState(new Date().toISOString().slice(0, 10));
     const [classAchievement, setClassAchievement] = useState('');
     const [classLesson, setClassLesson] = useState('');
     const [classLevel, setClassLevel] = useState('');

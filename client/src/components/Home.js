@@ -7,7 +7,7 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://server-production-6461.up.railway.app/api/student/students');
+            const response = await fetch('http://localhost:5001/api/student/students');
             const jsonData = await response.json();
             setScheduleData(jsonData);
             //console.log(jsonData);

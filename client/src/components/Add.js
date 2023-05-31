@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 //import '../styles/Add.css';
 
-function PopupForm({ classNumber, addStudent }) {
+function PopupForm({ classNumber, addStudent, setUpdate }) {
     const classNames = ['electronics', 'robotics', 'coding'];
     const {_class} = useParams();
 
@@ -105,8 +105,8 @@ function PopupForm({ classNumber, addStudent }) {
         .then((message) => {
             setShowSuccess(true);
             //console.log(message);
-            if(addStudent) window.location.reload();
-            else navigate('/');
+            if(addStudent) setUpdate(true);
+            navigate('/');
         })
         .catch((error) => {
             setShowError(true);
@@ -136,14 +136,14 @@ function PopupForm({ classNumber, addStudent }) {
     function buttons(name){
         return(
             <div className="flex justify-center items-center pt-5">
-                        <button className='
-                        px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-gray-600 cursor-pointer transition duration-300 ease-in-out
-                        '
-                        type="submit">Add New {name}</button>
-                        <button className='
-                        px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-red-500 cursor-pointer transition duration-300 ease-in-out
-                        '
-                        type="button" onClick={handleCancel}>Cancel</button>
+                <button className='
+                px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-gray-600 cursor-pointer transition duration-300 ease-in-out
+                '
+                type="submit">Add New {name}</button>
+                <button className='
+                px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-red-500 cursor-pointer transition duration-300 ease-in-out
+                '
+                type="button" onClick={handleCancel}>Cancel</button>
             </div>
         )
     }
@@ -329,7 +329,7 @@ function PopupForm({ classNumber, addStudent }) {
             </div>
         )}
         {showSuccess && (
-            <div className="alert alert-success shadow-lg" style={{ transition: 'opacity 0.5s ease', opacity: showSuccess ? 1 : 0 }}>
+            <div className="fixed top-4 left-[10vw] w-[80vw] alert alert-success shadow-lg" style={{ transition: 'opacity 0.5s ease', opacity: showSuccess ? 1 : 0 }}>
                 <div>
                 <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{addClass ? "Class" : addStudent ? "Student" : "Time"} saved successfully!</span>
@@ -337,7 +337,7 @@ function PopupForm({ classNumber, addStudent }) {
             </div>
         )}
         {showError && (
-            <div className="alert alert-error shadow-lg" style={{ transition: 'opacity 0.5s ease', opacity: showError ? 1 : 0 }}>
+            <div className="fixed top-4 left-[10vw] w-[80vw] alert alert-error shadow-lg" style={{ transition: 'opacity 0.5s ease', opacity: 1 }}>
                 <div>
                 <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>Error! {addClass ? "Class" : addStudent ? "Student" : "Time"} failed to save.</span>

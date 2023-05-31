@@ -4,7 +4,7 @@ import Add from './Add';
 
 //import "../styles/Schedule.css";
 
-function Schedule({schedule}) {
+function Schedule({schedule, setUpdate}) {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     //console.log(schedule ? schedule : "loading");
     return (
@@ -56,7 +56,7 @@ function Schedule({schedule}) {
                     <div>loading students</div>
                 )}
             </div>
-            <Add addStudent={true}/>
+            <Add addStudent={true} setUpdate={setUpdate}/>
         </div>
     );
 }

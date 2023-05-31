@@ -8,7 +8,7 @@ module.exports = {
   },
   plugins: [
     require("daisyui"),
-    require('@shrutibalasa/tailwind-grid-auto-fit')
+    require('@shrutibalasa/tailwind-grid-auto-fit'),
+    require("daisyui")
   ],
 }
-

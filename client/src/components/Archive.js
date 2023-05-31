@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import "../styles/Archive.css"
 
-function Archive({_id}) {
+//import "../styles/Archive.css"
+
+function Archive() {
     const [showArchive, setShowArchive] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -12,7 +13,7 @@ function Archive({_id}) {
         const body = { studentId: id };
 
         fetch(url, {
-            method: 'DELETE',
+            method: 'PUT',
             body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',

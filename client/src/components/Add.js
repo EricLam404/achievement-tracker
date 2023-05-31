@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../styles/Add.css';
+
+//import '../styles/Add.css';
 
 function PopupForm({ classNumber, addStudent }) {
     const classNames = ['electronics', 'robotics', 'coding'];
@@ -69,7 +70,7 @@ function PopupForm({ classNumber, addStudent }) {
     function handleSubmit(event) {
         event.preventDefault();
 
-        const url = "https://server-production-6461.up.railway.app/api/student/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
+        const url = "http://localhost:5001/api/student/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
         const body = addClass ?  newClass :  addStudent ? newStudent : newTime;
         fetch(url, {
             method: 'POST',
@@ -108,11 +109,26 @@ function PopupForm({ classNumber, addStudent }) {
         setShowPopup(false);
     }
 
+    function buttons(name){
+        return(
+            <div className="flex justify-center items-center">
+                        <button className='
+                        px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-gray-600 cursor-pointer transition duration-300 ease-in-out
+                        '
+                        type="submit">Add New {name}</button>
+                        <button className='
+                        px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-red-500 cursor-pointer transition duration-300 ease-in-out
+                        '
+                        type="button" onClick={handleCancel}>Cancel</button>
+            </div>
+        )
+    }
+
     function classPopup(){
         return (
             <>
             <h2>Add Class</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="flex items-center flex-col p-4" onSubmit={handleSubmit}>
                 <label htmlFor="classDate">Class Date:</label>
                 <input
                     type="date"
@@ -145,10 +161,7 @@ function PopupForm({ classNumber, addStudent }) {
                     onChange={(event) => setClassLevel(event.target.value)}
                     required
                 />
-                <div className="button-container">
-                    <button type="submit">Add Class</button>
-                    <button type="button" onClick={handleCancel}>Cancel</button>
-                </div>
+                {buttons("Class")}
             </form>
             </>
         )
@@ -157,7 +170,7 @@ function PopupForm({ classNumber, addStudent }) {
     function timePopup(){
         return (<>
             <h2>Add Timeslot</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="flex items-center flex-col p-4" onSubmit={handleSubmit}>
                 <label htmlFor="day">Class Day of the Week:</label>
                 <input
                     type="text"
@@ -174,10 +187,7 @@ function PopupForm({ classNumber, addStudent }) {
                     onChange={(event) => setTime(event.target.value)}
                     required
                 />
-                <div className="button-container">
-                    <button type="submit">Add Timeslot</button>
-                    <button type="button" onClick={handleCancel}>Cancel</button>
-                </div>
+                {buttons("Timeslot")}
             </form>
 
         </>)
@@ -185,7 +195,7 @@ function PopupForm({ classNumber, addStudent }) {
     function studentPopup(){
         return (<>
             <h2>Add New Student</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="flex items-center flex-col p-4" onSubmit={handleSubmit}>
                 <label htmlFor="name">Student Name:</label>
                 <input
                     type="text"
@@ -259,21 +269,20 @@ function PopupForm({ classNumber, addStudent }) {
                     required
                 />
 
-                <div className="button-container">
-                    <button type="submit">Add New Student</button>
-                    <button type="button" onClick={handleCancel}>Cancel</button>
-                </div>
+                {buttons("Student")}
             </form>
             </>
         )
     }
 
     return (
-        <div className='button-container'>
-        <button className='button' onClick={() => setShowPopup(true)}>Add {addClass ? "Class" : addStudent ? "Student" : "Time"}</button>
+        <div className='flex justify-center items-center'>
+        <button className='
+        fixed bottom-4 right-4 inline-block bg-gray-700 text-white rounded-[0.5rem] text-lg px-8 py-4 shadow-md transition-all duration-200 ease-in-out cursor-pointer text-center
+        ' onClick={() => setShowPopup(true)}>Add {addClass ? "Class" : addStudent ? "Student" : "Time"}</button>
         {showPopup && (
-            <div className="popup-container">
-            <div className="popup">
+            <div className="fixed top-0 left-0 bottom-0 right-0 bg-opacity-50 flex items-center justify-center bg-white rounded-2xl shadow-md p-8 font-roboto backdrop-blur">
+            <div className="bg-white p-4 rounded-md shadow-md text-black w-[calc(15vw + 300px)]">
                 {addClass ? classPopup() : addStudent ? studentPopup() : timePopup()}
             </div>
             </div>
@@ -281,5 +290,6 @@ function PopupForm({ classNumber, addStudent }) {
         </div>
     );
 }
+
 
 export default PopupForm;

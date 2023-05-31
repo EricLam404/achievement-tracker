@@ -1,9 +1,10 @@
 import React from 'react';
-import "../styles/Class.css";
 import { useParams, useLocation } from "react-router-dom";
 import Add from './Add';
 import Delete from './Delete';
 import Back from './Back';
+
+//import "../styles/Class.css";
 
 function Class() {
     const location = useLocation();

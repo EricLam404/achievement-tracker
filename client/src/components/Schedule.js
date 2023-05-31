@@ -1,15 +1,16 @@
 import React from 'react';
-import "../styles/Schedule.css";
 import { Link } from 'react-router-dom';
 import Add from './Add';
+
+//import "../styles/Schedule.css";
 
 function Schedule({schedule}) {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     //console.log(schedule ? schedule : "loading");
     return (
-        <div className="schedule-list">
-            <div className='name'>Student List</div>
-            <div className='week-list'>
+        <div className="font-sans m-8 mx-auto max-w-80 flex flex-col justify-center items-center px-5">
+            <div className='text-2xl font-bold mb-6'>Student List</div>
+            <div className='grid grid-auto-fit-[200px] gap-4 w-full'>
                 {schedule ? (
                     days.map((day, index) => {
                         const daySchedule = schedule.filter(student => {
@@ -23,8 +24,8 @@ function Schedule({schedule}) {
                         //console.log(day);
                         //console.log(times.length > 0 ? times : "Nothing");
                         return (
-                        <div className='week' key={index}>
-                            <div className='day-of-week' key={index}>{day}</div>
+                        <div className='flex flex-col items-center border border-gray-300 p-4 bg-gray-100' key={index}>
+                            <div className='text-lg font-bold mb-4' key={index}>{day}</div>
                             <ul>
                                 {
                                     times.map((time, index) => {
@@ -32,13 +33,13 @@ function Schedule({schedule}) {
                                             return student.days.some(days => days.day === day && days.time === time)
                                         });
                                         return (
-                                            <div className='time-box' key={index}>
-                                                <div className='time'>{time}</div>
-                                                <div className='students'>
+                                            <div className='flex justify-between items-center flex-col w-full mt-4' key={index}>
+                                                <div className='text-lg font-bold text-center'>{time}</div>
+                                                <div className='flex flex-wrap justify-center items-center flex-co "'>
                                                     {students.map((student, index) => {
                                                         return (
-                                                            <Link className="student-link" key={index} to={`/student/${student._id}`} state={{ student: student }}>
-                                                                <div className='student-name'>{student.name}</div>
+                                                            <Link key={index} to={`/student/${student._id}`} state={{ student: student }}>
+                                                                <div className='text-sm m-2 p-2 rounded-sm bg-gray-200 hover:bg-gray-300'>{student.name}</div>
                                                             </Link>
                                                         )
                                                     })}
@@ -54,8 +55,8 @@ function Schedule({schedule}) {
                 (
                     <div>loading students</div>
                 )}
-                <Add addStudent={true}/>
             </div>
+            <Add addStudent={true}/>
         </div>
     );
 }

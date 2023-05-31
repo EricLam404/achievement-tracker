@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react';
-import '../styles/Home.css';
 import Schedule from './Schedule';
+
+//import '../styles/Home.css';
 
 function Home() {
     const [scheduleData, setScheduleData] = useState([]);
@@ -17,8 +18,8 @@ function Home() {
     }, []);
     return (
         <div className="App">
-        <div className='header'>Achievement Tracker</div>
-        <Schedule schedule={scheduleData}/>
+            <div className='flex justify-center items-center h-20 text-2xl font-bold text-white bg-gradient-to-r from-teal-400 via-blue-400 to-teal-400 text-shadow-sm shadow-sm'>Achievement Tracker</div>
+            <Schedule schedule={scheduleData}/>
         </div>
     );
 }

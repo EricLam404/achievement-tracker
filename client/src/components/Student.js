@@ -6,7 +6,7 @@ import Back from './Back';
 import Delete from './Delete'
 import Archive from './Archive';
 
-import "../styles/Student.css"
+//import "../styles/Student.css"
 
 function Student() {
     const location = useLocation();

@@ -11,7 +11,7 @@ function Back(){
   }
 
     return(
-        <button className='back-btn' onClick={handleBack}>Go Back</button>
+        <button className='btn' onClick={handleBack}>Go Back</button>
     )
 }
 

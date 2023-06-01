@@ -17,27 +17,27 @@ function Student() {
     //console.log(classes);
     
     return (
-        <div className="student-list">
-            <div className='class-list'>Class List</div>
+        <div className="bg-gray-100 rounded-lg shadow-md p-8 flex flex-col items-center font-sans text-base text-gray-700 leading-relaxed">
+            <div className='text-2xl font-bold mb-4'>Class List</div>
             <ul>
                 {classNames.map((_class, index) => (
-                    <Link className='class-link' to={`class/${_class}`} state={classes[_class]} key={index}>
-                        <div>{_class[0].toUpperCase() + _class.substring(1)}</div>
+                    <Link to={`class/${_class}`} state={classes[_class]} key={index}>
+                        <div className='"text-gray-700 no-underline px-10 py-5 mx-5 rounded-lg bg-white shadow-md transition duration-300 ease-in-out hover:bg-gray-700 hover:text-white'>{_class[0].toUpperCase() + _class.substring(1)}</div>
                     </Link>
                 ))}
             </ul>
-            <div className='time-list'>Time List</div>
-            <ul className='times'>
+            <div className='font-bold text-2xl mt-5 mb-2'>Time List</div>
+            <ul className='flex flex-col'>
                 {time.map((time, index) => (
-                    <li className="timeslot" key={index}>
-                        <div className='day'>{time.day}</div>
-                        <div className='time'>{time.time}</div>
+                    <li className="bg-white rounded-lg shadow-md p-10 min-w-min justify-between flex flex-col items-center space-y-5" key={index}>
+                        <div className='text-lg font-bold uppercase text-gray-600'>{time.day}</div>
+                        <div className='text-base text-gray-400'>{time.time}</div>
                         <Delete _id={time._id} _name="Time"/>
                     </li>
                 ))}
                 <Add />
             </ul>
-            <div className='buttons'>
+            <div className='flex flex-col justify-center items-center m-4 space-y-6'>
                 <Delete _name="Student"/>
                 <Archive />
             </div>

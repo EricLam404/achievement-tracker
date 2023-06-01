@@ -44,14 +44,14 @@ function Delete({_id, _name}) {
 
     return (
         <div>
-        <button className='delete-btn' onClick={() => setShowDelete(true)}>Delete {_type}</button>
+        <button className='btn bg-red-500 border-none p-3 m3 hover:text-red-500' onClick={() => setShowDelete(true)}>Delete {_type}</button>
         {showDelete && (
-            <div className="popup-container">
-            <div className="popup">
-                <h2>Delete {_type}</h2>
-                <div className="button-container">
-                    <button type="submit" onClick={deleteId}>Delete {_type}</button>
-                    <button type="button" onClick={() => setShowDelete(false)}>
+            <div className="fixed top-0 left-0 bottom-0 right-0 bg-opacity-50 flex items-center justify-center bg-white rounded-2xl shadow-md p-8 font-roboto backdrop-blur">
+            <div className="bg-white p-4 rounded-md shadow-md text-black w-[calc(15vw + 300px)]">
+                <h2 className='text-xl font-bold m-5'>Are you sure you want to delete {_type}</h2>
+                <div className="flex gap-2 justify-center items-center p-5">
+                    <button className='btn btn-sm btn-error bg-red-500 border-none hover:text-gray-200' type="submit" onClick={deleteId}>Delete {_type}</button>
+                    <button className='btn btn-sm' type="button" onClick={() => setShowDelete(false)}>
                     Cancel
                     </button>
                 </div>

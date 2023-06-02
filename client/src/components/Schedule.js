@@ -35,7 +35,7 @@ function Schedule({schedule, setUpdate}) {
                                         return (
                                             <div className='flex justify-between items-center flex-col w-full mt-4' key={index}>
                                                 <div className='text-lg font-bold text-center'>{time}</div>
-                                                <div className='flex flex-wrap justify-center items-center flex-co "'>
+                                                <div className='flex flex-wrap justify-center items-center'>
                                                     {students.map((student, index) => {
                                                         return (
                                                             <Link key={index} to={`/student/${student._id}`} state={{ student: student }}>

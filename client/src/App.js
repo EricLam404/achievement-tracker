@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from "./components/Home";
-import Student from "./components/Student";
-import Class from "./components/Class";
+import Home from "./components/admin/Home";
+import Student from "./components/admin/Student";
+import Class from "./components/admin/Class";
 
 function App() {
     return (

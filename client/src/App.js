@@ -28,7 +28,7 @@ const Auth0ProviderWithRedirectCallback = ({ children, ...props }) => {
 function App() {
     return (
         <BrowserRouter>
-        <Auth0Provider
+        <Auth0ProviderWithRedirectCallback
             domain={process.env.REACT_APP_AUTH0_DOMAIN}
             clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
             authorizationParams={{
@@ -36,12 +36,12 @@ function App() {
             }}
         >
         <Routes>
-            <Route path="/" element={<Login />}></Route>
-            <Route path="/login" element={<Login/>}></Route>
-            <Route path="/student/:id" element={<Student />} />
-            <Route path="/student/:id/class/:_class" element={<Class />} />
+            <Route path="/" element={<ProtectedRoute component={Home} />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/student/:id" element={<ProtectedRoute component={Student} />} />
+            <Route path="/student/:id/class/:_class" element={<ProtectedRoute component={Class} />} />
         </Routes>
-        </Auth0Provider>
+        </Auth0ProviderWithRedirectCallback>
         </BrowserRouter>
     );
 }

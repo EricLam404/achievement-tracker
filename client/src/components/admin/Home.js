@@ -1,8 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import Schedule from './Schedule';
 
-//import '../styles/Home.css';
-
 function Home() {
     const [scheduleData, setScheduleData] = useState([]);
     const [update, setUpdate] = useState(false);

@@ -1,21 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const app = express();
+const cors = require('cors');
 require('dotenv').config();
 mongoose.set('strictQuery', false);
 
-const app = express();
-app.use(express.json());
-
-app.use(function(req, res, next) {
-    var origin = req.headers.origin;
-    if (origin === 'https://client-production-6461.up.railway.app' || "http://localhost:3000/"){
-        res.setHeader('Access-Control-Allow-Origin', origin);
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    }
-    next();
+const { auth } = require('express-oauth2-jwt-bearer');
+const jwtCheck = auth({
+    audience: process.env.AUDIENCE,
+    issuerBaseURL: process.env.ISSUER_BASE_URL,
+    tokenSigningAlg: 'RS256'
 });
+
+app.use(express.json());
+app.use(cors());
 
 const indexRouter = require("./routes/home");
 const apiRouter = require("./routes/api");
@@ -34,6 +32,13 @@ async function main() {
 }
   
 main();
+
+//app.use(jwtCheck);
+
+app.get('/test', function(req, res, ) {
+    console.log(req.headers);
+    res.send("TEST");
+});
 
 app.use('/', indexRouter);
 app.use("/api", apiRouter);

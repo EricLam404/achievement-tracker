@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Add from './Add';
 
-//import "../styles/Schedule.css";
-
 function Schedule({schedule, setUpdate}) {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     //console.log(schedule ? schedule : "loading");

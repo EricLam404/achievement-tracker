@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
 import { Auth0Provider, withAuthenticationRequired } from '@auth0/auth0-react';
 
-import Login from './components/Login/Login';
-import Home from "./components/admin/Home";
+import Login from './components/main/Login';
+import Home from "./components/main/Home";
 import Student from "./components/admin/Student";
 import Class from "./components/admin/Class";
 

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-//import "../styles/Delete.css"
-
 function Delete({_id, _name}) {
     const [showDelete, setShowDelete] = useState(false);
     const navigate = useNavigate();

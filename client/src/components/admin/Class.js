@@ -4,8 +4,6 @@ import Add from './Add';
 import Delete from './Delete';
 import Back from './Back';
 
-//import "../styles/Class.css";
-
 function Class() {
     const location = useLocation();
     const classes = location.state;

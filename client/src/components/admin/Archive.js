@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-//import "../styles/Archive.css"
-
 function Archive() {
     const [showArchive, setShowArchive] = useState(false);
     const navigate = useNavigate();

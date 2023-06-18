@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-//import '../styles/Add.css';
-
 function PopupForm({ classNumber, addStudent, setUpdate }) {
     const classNames = ['electronics', 'robotics', 'coding'];
     const {_class} = useParams();

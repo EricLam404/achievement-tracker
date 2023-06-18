@@ -6,12 +6,12 @@ const Profile = () => {
 
   async function callAPI(){
     const token = await getAccessTokenSilently()
-    const url = 'http://localhost:5001/api/student/students';
+    const url = 'http://localhost:5001/test';
     fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            Authentication: `Bearer ${token}`
+            'Authentication': `Bearer ${token}`
         },
     })
     .then((response) => response.text())

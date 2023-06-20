@@ -15,7 +15,6 @@ router.get("/students", async (req, res) => {
     try {
         const students = await Student.find({});
         res.json(students);
-        console.log("Got students");
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Error Getting Students');

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from "react-router-dom";
 
 import Add from './Add';
-import Back from './Back';
+import Back from '../main/Back';
 import Delete from './Delete'
 import Archive from './Archive';
 

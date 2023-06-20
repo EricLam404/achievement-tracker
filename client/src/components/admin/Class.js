@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useLocation } from "react-router-dom";
 import Add from './Add';
 import Delete from './Delete';
-import Back from './Back';
+import Back from '../main/Back';
 
 function Class() {
     const location = useLocation();

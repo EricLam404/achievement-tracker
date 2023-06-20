@@ -6,6 +6,8 @@ function Schedule({schedule, setUpdate}) {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     //console.log(schedule ? schedule : "loading");
     return (
+        <>
+        <div className='flex justify-center items-center h-20 text-2xl font-bold text-white bg-gradient-to-r from-teal-400 via-blue-400 to-teal-400 text-shadow-sm shadow-sm'>Achievement Tracker</div>
         <div className="font-sans m-8 mx-auto max-w-80 flex flex-col justify-center items-center px-5">
             <div className='text-2xl font-bold mb-6'>Student List</div>
             <div className='grid grid-auto-fit-[200px] gap-4 w-full'>
@@ -56,6 +58,7 @@ function Schedule({schedule, setUpdate}) {
             </div>
             <Add addStudent={true} setUpdate={setUpdate}/>
         </div>
+    </>
     );
 }
 

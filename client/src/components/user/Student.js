@@ -3,7 +3,9 @@ import React from 'react';
 function Student() {
     
     return (
-        <div>STUDENTS</div>
+        <div>
+            student
+        </div>
     );
 }
 

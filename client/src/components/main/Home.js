@@ -2,6 +2,7 @@ import React, { useEffect, useState} from 'react';
 import Schedule from '../admin/Schedule';
 import { useAuth0 } from "@auth0/auth0-react";
 import Student from '../user/Student';
+import Header from './Header';
 
 function Home() {
     const [scheduleData, setScheduleData] = useState([]);
@@ -25,7 +26,7 @@ function Home() {
     }, []);
     return (
         <div className="App">
-            <div className='flex justify-center items-center h-20 text-2xl font-bold text-white bg-gradient-to-r from-teal-400 via-blue-400 to-teal-400 text-shadow-sm shadow-sm'>Achievement Tracker</div>
+            <Header/>
             { user?.email.split("@")[1] === "test.com" ? 
                 <Student /> :
                 <Schedule schedule={scheduleData} setUpdate={setUpdate}/>

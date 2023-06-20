@@ -27,7 +27,7 @@ function Home() {
     return (
         <div className="App">
             <Header/>
-            { user?.email.split("@")[1] === "test.com" ? 
+            { user?.email.split("@")[1] === process.env.REACT_APP_ADMIN_EMAIL ? 
                 <Student /> :
                 <Schedule schedule={scheduleData} setUpdate={setUpdate}/>
             }

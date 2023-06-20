@@ -5,6 +5,7 @@ import { Auth0Provider, withAuthenticationRequired } from '@auth0/auth0-react';
 import Login from './components/main/Login';
 import Home from "./components/main/Home";
 import Profile from './components/main/Profile';
+import CreateProfile from './components/main/CreateProfile';
 import Student from "./components/admin/Student";
 import Class from "./components/admin/Class";
 
@@ -39,7 +40,8 @@ function App() {
         <Routes>
             <Route path="/" element={<ProtectedRoute component={Home} />}></Route>
             <Route path="/login" element={<Login />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/profile" element={<ProtectedRoute component={Profile} />}></Route>
+            <Route path="/create/profile" element={<ProtectedRoute component={CreateProfile} />}></Route>
             <Route path="/student/:id" element={<ProtectedRoute component={Student} />} />
             <Route path="/student/:id/class/:_class" element={<ProtectedRoute component={Class} />} />
         </Routes>

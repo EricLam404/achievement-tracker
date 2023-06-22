@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Archive() {
+    const { getAccessTokenSilently } = useAuth0();
     const [showArchive, setShowArchive] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
 
-    function archiveId(){
+    async function archiveId(){
         const url = "http://localhost:5001/api/student/archive/student";
         const body = { studentId: id };
+        const token = await getAccessTokenSilently();
 
         fetch(url, {
             method: 'PUT',
             body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`,
             },
         })
         .then((response) => response.text())

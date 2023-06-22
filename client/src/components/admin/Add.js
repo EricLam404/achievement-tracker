@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function PopupForm({ classNumber, addStudent, setUpdate }) {
+    const { getAccessTokenSilently } = useAuth0();
     const classNames = ['electronics', 'robotics', 'coding'];
     const {_class} = useParams();
 
@@ -87,16 +89,18 @@ function PopupForm({ classNumber, addStudent, setUpdate }) {
         }
     }, [showError]);
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         const url = "http://localhost:5001/api/student/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
         const body = addClass ?  newClass :  addStudent ? newStudent : newTime;
+        const token = await getAccessTokenSilently();
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`,
             },
         })
         .then((response) => response.text())

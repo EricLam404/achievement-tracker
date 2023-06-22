@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Delete({_id, _name}) {
+    const { getAccessTokenSilently } = useAuth0();
     const [showDelete, setShowDelete] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
     const classes = ['robotics', 'electronics', 'coding'];
     const _type = classes.includes(_name) ? "Class" : _name;
 
-    function deleteId(){
+    async function deleteId(){
         let url = "http://localhost:5001/api/student/delete/", body = "";
         if(_type === "Class"){
             url += `class/${_name}`;
@@ -22,12 +24,14 @@ function Delete({_id, _name}) {
             url += "student";
             body = { studentId: id};
         }
+        const token = await getAccessTokenSilently();
 
         fetch(url, {
             method: 'DELETE',
             body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`,
             },
         })
         .then((response) => response.text())

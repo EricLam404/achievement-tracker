@@ -7,13 +7,23 @@ import Header from './Header';
 function Home() {
     const [scheduleData, setScheduleData] = useState([]);
     const [update, setUpdate] = useState(false);
-    const { user } = useAuth0();
+    const { user, getAccessTokenSilently } = useAuth0();
 
     const fetchData = async () => {
-        const response = await fetch('http://localhost:5001/api/student/students');
-        const jsonData = await response.json();
+        try{
+            const url = 'http://localhost:5001/api/student/students';
+            const token = await getAccessTokenSilently();
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            })
+            const jsonData = await response.json();
         setScheduleData(jsonData);
-        //console.log(jsonData);
+        } catch (e){
+            console.log(e);
+        }
     };
     
     useEffect(() => {

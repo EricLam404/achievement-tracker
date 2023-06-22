@@ -12,8 +12,13 @@ const jwtCheck = auth({
     tokenSigningAlg: 'RS256'
 });
 
+const corsOptions =  {
+    origin: 'http://localhost:3000'
+};
+  
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cors());
+
 
 const indexRouter = require("./routes/home");
 const apiRouter = require("./routes/api");
@@ -33,11 +38,10 @@ async function main() {
   
 main();
 
-//app.use(jwtCheck);
+app.use(jwtCheck);
 
 app.get('/test', function(req, res, ) {
-    console.log(req.headers);
-    res.send("TEST");
+    res.json("TEST");
 });
 
 app.use('/', indexRouter);

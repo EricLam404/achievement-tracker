@@ -34,7 +34,9 @@ function App() {
             domain={process.env.REACT_APP_AUTH0_DOMAIN}
             clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
             authorizationParams={{
-              redirect_uri: window.location.origin
+              redirect_uri: window.location.origin,
+              audience: "http://localhost:5001",
+              scope: "openid profile email update:current_user_metadata"
             }}
         >
         <Routes>

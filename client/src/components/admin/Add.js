@@ -31,7 +31,7 @@ function PopupForm({ classNumber, addStudent, setUpdate }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [dob, setDob] = useState('');
-    const [age, setAge] = useState(6);
+    const [age, setAge] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [started, setStarted] = useState(new Date().toISOString().slice(0, 10));
@@ -114,18 +114,22 @@ function PopupForm({ classNumber, addStudent, setUpdate }) {
             setShowError(true);
             console.error(error);
         });
-        setClassDate('');
-        setClassAchievement('');
-        setClassLesson('');
-        setClassLevel('');
-        setShowPopup(false);
+        handleCancel();
     }
 
     function handleCancel() {
         if(addClass){
-            setClassDate('');
             setClassAchievement('');
             setClassLesson('');
+            setClassLevel('');
+        }
+        else if(addStudent){
+            setName('');
+            setEmail('');
+            setDob('');
+            setAge('');
+            setPhone('');
+            setAddress('');
         }
         else {
             setDay('');

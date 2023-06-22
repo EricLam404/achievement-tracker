@@ -36,7 +36,6 @@ function Delete({_id, _name}) {
         })
         .then((response) => response.text())
         .then((message) => {
-            console.log(message);
             navigate('/');
         })
         .catch((error) => {

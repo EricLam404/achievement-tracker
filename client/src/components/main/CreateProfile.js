@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 
@@ -9,10 +9,11 @@ function CreateProfile(){
   const [childName, setChildName] = useState('');
   const [childDOB, setChildDOB] = useState('');
 
-  const {user, isAuthenticated} = useAuth0();
+  const {user, getAccessTokenSilently} = useAuth0();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  if(user["http://localhost:3000//user_metadata/profile"]) navigate('/');
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let profile = {
@@ -22,12 +23,15 @@ function CreateProfile(){
       child_name: childName,
       child_DOB: childDOB
     };
+    const token = await getAccessTokenSilently();
 
     fetch("/api/user/metadata", {
         method: 'PUT',
         body: JSON.stringify(profile),
         headers: {
             'Content-Type': 'application/json',
+            uthorization: `Bearer ${token}`,
+
         },
     })
     .then((response) => response.text())

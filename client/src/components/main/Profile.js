@@ -18,6 +18,7 @@ const Profile = () => {
         //console.log(user);
         const dataJSON = await data.json();
         console.log("DATA:\n", dataJSON)
+        console.log(user)
     } catch (e){
         console.log(e);
     }
@@ -27,10 +28,7 @@ const Profile = () => {
     isAuthenticated ?
         <div>
             {user?.picture && <img src={user.picture} alt={user.name} />}   
-            <h2>{user?.name}</h2>    
-            <ul>
-                {Object.keys(user).map((objKey, i) => <li key={i}>{objKey}: {user[objKey]}</li>)}
-            </ul>     
+            <h2>{user?.name}</h2>        
             <LogoutButton/>
             <Back/>
             <button className="btn" onClick={callAPI}>CALL API</button>

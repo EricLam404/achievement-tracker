@@ -3,11 +3,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 
 function CreateProfile(){
-  const [parentName, setParentName] = useState('');
-  const [parentDOB, setParentDOB] = useState('');
-  const [phone, setPhone] = useState('');
-  const [childName, setChildName] = useState('');
-  const [childDOB, setChildDOB] = useState('');
+  const [parentName, setParentName] = useState('test');
+  const [parentDOB, setParentDOB] = useState('2000-06-24');
+  const [phone, setPhone] = useState('111-111-1111');
+  const [childName, setChildName] = useState('test');
+  const [childDOB, setChildDOB] = useState('2000-06-24');
 
   const {user, getAccessTokenSilently} = useAuth0();
   const navigate = useNavigate();
@@ -30,7 +30,10 @@ function CreateProfile(){
 
     fetch("http://localhost:5001/api/user/metadata", {
         method: 'POST',
-        body: JSON.stringify(profile),
+        body: JSON.stringify({
+          profile: profile,
+          user: user
+          }),
         headers: {
             'Content-Type': 'application/json',
             authorization: `Bearer ${token}`,

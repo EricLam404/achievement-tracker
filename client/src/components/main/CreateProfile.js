@@ -12,7 +12,10 @@ function CreateProfile(){
   const {user, getAccessTokenSilently} = useAuth0();
   const navigate = useNavigate();
 
-  if(user["http://localhost:3000//user_metadata/profile"]) navigate('/');
+  useEffect(() => {
+    if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length !== 0) navigate('/');
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,12 +28,12 @@ function CreateProfile(){
     };
     const token = await getAccessTokenSilently();
 
-    fetch("/api/user/metadata", {
-        method: 'PUT',
+    fetch("http://localhost:5001/api/user/metadata", {
+        method: 'POST',
         body: JSON.stringify(profile),
         headers: {
             'Content-Type': 'application/json',
-            uthorization: `Bearer ${token}`,
+            authorization: `Bearer ${token}`,
 
         },
     })
@@ -110,6 +113,7 @@ function CreateProfile(){
         </div>
         <button
             type="submit"
+            onSubmit={handleSubmit}
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
         >
             Create

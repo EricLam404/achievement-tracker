@@ -5,8 +5,8 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get("/metadata", async (req, res) => {
-   
+router.post("/metadata", async (req, res) => {
+    res.send(req.body);
 })
 
 module.exports = router;

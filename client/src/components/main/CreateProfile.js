@@ -13,6 +13,7 @@ function CreateProfile(){
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(user)
     if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length !== 0) navigate('/');
   }, []);
 
@@ -49,6 +50,7 @@ function CreateProfile(){
         console.error(error);
     });
   };
+
 
   return (
     <div className="container mx-auto px-4 py-8">

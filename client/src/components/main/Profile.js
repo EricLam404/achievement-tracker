@@ -5,25 +5,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
-
-  async function callAPI(){
-    try{
-        const url = 'http://localhost:5001/test';
-        const token = await getAccessTokenSilently();
-        const data = await fetch(url, {
-            method: 'GET',
-            headers: {
-                authorization: `Bearer ${token}`,
-            },
-        })
-        //console.log(user);
-        const dataJSON = await data.json();
-    } catch (e){
-        console.log(e);
-    }
-  }
+  const profile = user["http://localhost:3000//user_metadata/profile"];
 
   useEffect(() => {
     if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length === 0) navigate('/create/profile');
@@ -32,11 +16,15 @@ const Profile = () => {
   return (
     isAuthenticated ?
         <div>
-            {user?.picture && <img src={user.picture} alt={user.name} />}   
-            <h2>{user?.name}</h2>        
+            <h1>Profile</h1>
+            <h2>Email: {user?.email}</h2>
+            <div>Parent's Name: {profile?.parent_name}</div>
+            <div>Parent's Date of Birth: {profile?.parent_DOB}</div>
+            <div>Phone Number: {profile?.phone}</div>
+            <div>Child's Name: {profile?.child_name}</div>
+            <div>Child's Date of Birth: {profile?.child_DOB}</div>
             <LogoutButton/>
             <Back/>
-            <button className="btn" onClick={callAPI}>CALL API</button>
         </div> :
         <div>Please Sign in</div>
   )

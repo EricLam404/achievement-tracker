@@ -253,7 +253,7 @@ function PopupForm({ classNumber, addStudent, setUpdate }) {
                 <label className='labal' htmlFor="dob">Date of birth:</label>
                 <input
                     className="input input-bordered w-full max-w-xs"
-                    type="text"
+                    type="date"
                     id="dob"
                     value={dob}
                     onChange={(event) => setDob(event.target.value)}

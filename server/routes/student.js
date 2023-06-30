@@ -21,6 +21,25 @@ router.get("/students", async (req, res) => {
     }
 })
 
+router.get("/student", async(req, res) => {
+    let name = req.body.profile.child_name;
+    let dob = req.body.profile.child_dob;
+    try {
+        Student.findOne({ name: name, dob: dob }, (err, student) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            if (!student) {
+                return res.status(404).send('Student not found');
+            }
+            res.send(student);
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send(`Error Getting Student ${name} `);
+    }
+})
+
 router.use('/add', addRouter);
 router.use('/delete', deleteRouter);
 router.use('/archive', archiveRouter);

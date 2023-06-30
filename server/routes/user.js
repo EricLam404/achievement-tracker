@@ -1,5 +1,6 @@
 const router = require("express").Router();
 var axios = require("axios").default;
+const Student = require('../models/student');
 
 router.get('/', function(req, res, next) {
     res.render('home', { title: 'user' });
@@ -28,7 +29,7 @@ router.post("/metadata", async (req, res) => {
             data: {user_metadata: {profile: req.body.profile}}
         };
     
-        axios.request(options).then(function (response) {        
+        axios.request(options).then(function (response) {              
             res.json(response.data);
         }).catch(function (error) {
             console.error(error);

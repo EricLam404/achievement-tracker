@@ -13,8 +13,9 @@ function CreateProfile(){
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user)
-    if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length !== 0) navigate('/');
+    if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length !== 0){
+      navigate('/');
+    }
   }, []);
 
   const handleSubmit = async (e) => {
@@ -43,7 +44,8 @@ function CreateProfile(){
     })
     .then((response) => response.text())
     .then((message) => {
-        console.log(message);
+        let messageJSON = JSON.parse(message);
+        user["http://localhost:3000//user_metadata/profile"] = messageJSON.user_metadata.profile;
         navigate('/');
     })
     .catch((error) => {

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();
-  
+
   async function callAPI(){
     try{
         const url = 'http://localhost:5001/test';
@@ -20,8 +20,6 @@ const Profile = () => {
         })
         //console.log(user);
         const dataJSON = await data.json();
-        console.log("DATA:\n", dataJSON)
-        console.log(user)
     } catch (e){
         console.log(e);
     }

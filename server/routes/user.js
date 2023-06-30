@@ -28,7 +28,7 @@ router.post("/metadata", async (req, res) => {
             data: {user_metadata: {profile: req.body.profile}}
         };
     
-        axios.request(options).then(function (response) {
+        axios.request(options).then(function (response) {        
             res.json(response.data);
         }).catch(function (error) {
             console.error(error);

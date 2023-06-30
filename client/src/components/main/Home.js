@@ -22,7 +22,7 @@ function Home() {
                 },
             })
             const jsonData = await response.json();
-        setScheduleData(jsonData);
+            setScheduleData(jsonData);
         } catch (e){
             console.log(e);
         }
@@ -35,11 +35,9 @@ function Home() {
     
     useEffect(() => {
         fetchData();
+        if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length === 0) navigate('/create/profile');
     }, []);
 
-    useEffect(() => {
-        if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length === 0) navigate('/create/profile');
-      }, []);
     return (
         <div className="App">
             <Header/>

@@ -40,12 +40,16 @@ router.post("/student", async(req, res) => {
         };
           
         axios.request(managementAPI).then(function (response) {
+            console.log(req.body.user)
             const token = response.data.access_token;
             var options = {
                 method: 'PATCH',
                 url: 'https://dev-x26mr5lwtu83zf7o.us.auth0.com/api/v2/users/' + req.body.user.sub,
                 headers: {authorization: 'Bearer ' + token, 'content-type': 'application/json'},
-                data: {app_metadata: {student_id: id}}
+                data: {app_metadata: {profile: {
+                    ...req.body.user['http://localhost:3000//app_metadata/profile'],
+                    student_id: id
+                }}}
             };
         
             axios.request(options).then(function (response) {              
@@ -59,6 +63,18 @@ router.post("/student", async(req, res) => {
     } catch (err) {
         console.error(err.message);
         res.status(500).send(`Error Getting Student ${name} `);
+    }
+})
+
+router.get("/student/:id", async(req, res) => {
+    try {
+        let student_id = req.params.id;
+        let student = await Student.findOne({ _id: student_id });
+        res.json(student);
+        
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send(`Error Getting Student`);
     }
 })
 

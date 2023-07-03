@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-  const { user, isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
   const navigate = useNavigate();
   const profile = user["http://localhost:3000//user_metadata/profile"];
 
@@ -14,19 +14,17 @@ const Profile = () => {
   }, []);
 
   return (
-    isAuthenticated ?
-        <div>
-            <h1>Profile</h1>
-            <h2>Email: {user?.email}</h2>
-            <div>Parent's Name: {profile?.parent_name}</div>
-            <div>Parent's Date of Birth: {profile?.parent_DOB}</div>
-            <div>Phone Number: {profile?.phone}</div>
-            <div>Child's Name: {profile?.child_name}</div>
-            <div>Child's Date of Birth: {profile?.child_DOB}</div>
-            <LogoutButton/>
-            <Back/>
-        </div> :
-        <div>Please Sign in</div>
+    <div>
+        <h1>Profile</h1>
+        <h2>Email: {user?.email}</h2>
+        <div>Parent's Name: {profile?.parent_name}</div>
+        <div>Parent's Date of Birth: {profile?.parent_DOB}</div>
+        <div>Phone Number: {profile?.phone}</div>
+        <div>Child's Name: {profile?.child_name}</div>
+        <div>Child's Date of Birth: {profile?.child_DOB}</div>
+        <LogoutButton/>
+        <Back/>
+    </div>
   )
 };
 

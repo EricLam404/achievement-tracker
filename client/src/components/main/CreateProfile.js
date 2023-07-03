@@ -62,7 +62,8 @@ function CreateProfile(){
         })
         .then((response) => response.text())
         .then((message) => {
-            console.log(message);
+          let messageJSON = JSON.parse(message);
+          user["http://localhost:3000//app_metadata/profile"] = messageJSON.app_metadata.profile;
         })
         .catch((error) => {
             console.error(error);

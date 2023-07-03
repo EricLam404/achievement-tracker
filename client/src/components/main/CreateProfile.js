@@ -47,6 +47,27 @@ function CreateProfile(){
         let messageJSON = JSON.parse(message);
         user["http://localhost:3000//user_metadata/profile"] = messageJSON.user_metadata.profile;
         navigate('/');
+        fetch("http://localhost:5001/api/student/student", {
+          method: 'POST',
+          body: JSON.stringify({
+            user: user,
+            name: messageJSON.user_metadata.profile.child_name,
+            dob: messageJSON.user_metadata.profile.child_DOB
+          }),
+          headers: {
+              'Content-Type': 'application/json',
+              authorization: `Bearer ${token}`,
+
+          },
+        })
+        .then((response) => response.text())
+        .then((message) => {
+            console.log(message);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+
     })
     .catch((error) => {
         console.error(error);

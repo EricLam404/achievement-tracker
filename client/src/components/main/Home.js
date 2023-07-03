@@ -8,6 +8,7 @@ import Header from './Header';
 function Home() {
     const [scheduleData, setScheduleData] = useState([]);
     const [update, setUpdate] = useState(false);
+    const [showParent, setShowParent] = useState(false);
     const { user, getAccessTokenSilently } = useAuth0();
     const navigate = useNavigate();
 
@@ -35,16 +36,37 @@ function Home() {
     
     useEffect(() => {
         fetchData();
-        if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length === 0) navigate('/create/profile');
-    }, []);
+        if(Object.entries(user["http://localhost:3000//user_metadata/profile"]).length === 0 && showParent) navigate('/create/profile');
+    }, [showParent]);
+
+    function handleToggle(){
+        setShowParent(() => {
+            return !showParent;
+        })
+    }
+
+    function isAdmin(){
+        return (user?.email.split("@")[1] === process.env.REACT_APP_ADMIN_EMAIL);
+    }
 
     return (
         <div className="App">
-            <Header/>
-            { user?.email.split("@")[1] === process.env.REACT_APP_ADMIN_EMAIL ? 
-                <Schedule schedule={scheduleData} setUpdate={setUpdate}/> :
-                <Student /> 
-            }
+            <Header />
+            {isAdmin() ? (
+            <div>
+                <div> 
+                    <div>Parent View</div>
+                    <input type="checkbox" className='toggle' onClick={handleToggle}/>
+                </div>
+                {showParent ? (
+                    <Student />
+                ) : (
+                    <Schedule schedule={scheduleData} setUpdate={setUpdate} />
+                )}
+            </div>
+            ) : (
+            <Student />
+            )}
         </div>
     );
 }

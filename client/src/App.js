@@ -7,7 +7,8 @@ import Home from "./components/main/Home";
 import Profile from './components/main/Profile';
 import CreateProfile from './components/main/CreateProfile';
 import Student from "./components/admin/Student";
-import Class from "./components/admin/Class";
+import AdminClass from "./components/admin/Class";
+import StudentClass from './components/user/Class';
 
 const ProtectedRoute = ({ component, ...args }) => {
   const Component = withAuthenticationRequired(component, args);
@@ -41,11 +42,12 @@ function App() {
         >
         <Routes>
             <Route path="/" element={<ProtectedRoute component={Home} />}></Route>
+            <Route path="/class/:_class" element={<ProtectedRoute component={StudentClass} />} />
             <Route path="/login" element={<Login />}></Route>
             <Route path="/profile" element={<ProtectedRoute component={Profile} />}></Route>
             <Route path="/create/profile" element={<ProtectedRoute component={CreateProfile} />}></Route>
             <Route path="/student/:id" element={<ProtectedRoute component={Student} />} />
-            <Route path="/student/:id/class/:_class" element={<ProtectedRoute component={Class} />} />
+            <Route path="/student/:id/class/:_class" element={<ProtectedRoute component={AdminClass} />} />
         </Routes>
         </Auth0ProviderWithRedirectCallback>
         </BrowserRouter>

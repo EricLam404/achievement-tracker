@@ -2,17 +2,12 @@ const router = require("express").Router();
 var axios = require("axios").default;
 
 const Student = require('../models/student');
+const Archive = require('../models/archive');
 
-const addRouter = require("./add");
-const deleteRouter = require("./delete");
-const archiveRouter = require("./archive");
+const classesRouter = require('./classes');
+const timesRouter = require('./times');
 
-router.get('/', function(req, res, next) {
-    res.render('home', { title: 'student' });
-});
-
-
-router.get("/students", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const students = await Student.find({});
         res.json(students);
@@ -66,7 +61,7 @@ router.post("/student", async(req, res) => {
     }
 })
 
-router.get("/student/:id", async(req, res) => {
+router.get("/:id", async(req, res) => {
     try {
         let student_id = req.params.id;
         let student = await Student.findOne({ _id: student_id });
@@ -78,8 +73,76 @@ router.get("/student/:id", async(req, res) => {
     }
 })
 
-router.use('/add', addRouter);
-router.use('/delete', deleteRouter);
-router.use('/archive', archiveRouter);
+router.post('/', async (req, res) => {
+    const { 
+        name,
+        email,
+        dob,
+        age,
+        phone,
+        address,
+        started,
+        days,
+        classes 
+    } = req.body;
+
+    const student = new Student({
+        name: name,
+        email: email,
+        dob: dob,
+        age: age,
+        phone: phone,
+        address: address,
+        started: started,
+        days: days,
+        classes: classes
+    });
+    try {
+        const doc = await student.save();
+        res.send(doc);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error Adding Student');
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    const { studentId } = req.body;
+    try {
+        const doc = await Student.findOneAndRemove({_id: studentId});
+        res.send(doc);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error Deleting Student');
+    }
+});
+
+router.put('/archive/:id', async (req, res) => {
+    const { studentId } = req.body;
+    const deletedStudent = await Student.findOne({_id: studentId});
+    const student = deletedStudent.toJSON();
+    const archiveStudent = new Archive({ student: student });
+
+    try {
+        const doc = await archiveStudent.save();
+        res.send(doc);
+        console.log('Student archived successfully!');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error while archiving student!');
+    }
+
+    try {
+        await Student.findOneAndRemove({_id: studentId});
+        console.log("Archived and deleted student");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error while deleting student!');
+    }
+});
+
+router.use('/classes', classesRouter);
+router.use('/times', timesRouter);
+
 
 module.exports = router;

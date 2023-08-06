@@ -1,13 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const studentRouter = require("./student");
-const userRouter = require("./user");
+const studentsRouter = require("./students");
+const usersRouter = require("./users");
 
-router.get('/', function(req, res, next) {
-  res.render('home', { title: 'api' });
-});
-
-router.use('/student', studentRouter);
-router.use('/user', userRouter);
+router.use('/students', studentsRouter);
+router.use('/users', usersRouter);
 
 module.exports = router;

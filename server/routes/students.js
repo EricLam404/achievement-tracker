@@ -10,10 +10,12 @@ const timesRouter = require('./times');
 router.get("/", async (req, res) => {
     try {
         const students = await Student.find({});
-        res.json(students);
+        res.status(200).json(students);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Error Getting Students');
+        res.status(500).send({
+            message: 'Error Getting Students',
+            error: err
+        });
     }
 })
 
@@ -61,87 +63,85 @@ router.post("/student", async(req, res) => {
     }
 })
 
-router.get("/:id", async(req, res) => {
+router.get("/:student_id", async(req, res) => {
     try {
-        let student_id = req.params.id;
+        const { student_id } = req.params;
         let student = await Student.findOne({ _id: student_id });
-        res.json(student);
+        res.status(200).json(student);
         
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send(`Error Getting Student`);
+        res.status(500).send({
+            message: `Error Getting Student`,
+            error: err
+        });
     }
 })
 
 router.post('/', async (req, res) => {
-    const { 
-        name,
-        email,
-        dob,
-        age,
-        phone,
-        address,
-        started,
-        days,
-        classes 
-    } = req.body;
-
-    const student = new Student({
-        name: name,
-        email: email,
-        dob: dob,
-        age: age,
-        phone: phone,
-        address: address,
-        started: started,
-        days: days,
-        classes: classes
-    });
     try {
-        const doc = await student.save();
-        res.send(doc);
+        const { 
+            name,
+            email,
+            dob,
+            age,
+            phone,
+            address,
+            started,
+            days,
+            classes 
+        } = req.body;
+    
+        const studentObject = new Student({
+            name: name,
+            email: email,
+            dob: dob,
+            age: age,
+            phone: phone,
+            address: address,
+            started: started,
+            days: days,
+            classes: classes
+        });
+        const student = await studentObject.save();
+        res.send(student);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Error Adding Student');
+        res.status(500).send({
+            message: 'Error Adding Student',
+            error: err
+        });
     }
 });
 
-router.delete('/:id', async (req, res) => {
-    const { studentId } = req.body;
+router.delete('/:student_id', async (req, res) => {
     try {
-        const doc = await Student.findOneAndRemove({_id: studentId});
-        res.send(doc);
+        const { student_id } = req.params;
+        const deletedStudent = await Student.findOneAndRemove({_id: student_id});
+        res.status(200).send(deletedStudent);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Error Deleting Student');
+        res.status(500).send({
+            message: 'Error Deleting Students',
+            error: err
+        });
     }
 });
 
-router.put('/archive/:id', async (req, res) => {
-    const { studentId } = req.body;
-    const deletedStudent = await Student.findOne({_id: studentId});
-    const student = deletedStudent.toJSON();
-    const archiveStudent = new Archive({ student: student });
-
+router.put('/archive/:student_id', async (req, res) => {
     try {
-        const doc = await archiveStudent.save();
-        res.send(doc);
-        console.log('Student archived successfully!');
+        const { student_id } = req.params;
+        const deletedStudent = await Student.findOne({_id: student_id});
+        const archiveStudentObject = new Archive({ student: deletedStudent.toJSON() });
+        const archivedStudent = await archiveStudentObject.save();
+        await Student.findByIdAndRemove(student_id);
+        res.status(200).send(archivedStudent);
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Error while archiving student!');
-    }
-
-    try {
-        await Student.findOneAndRemove({_id: studentId});
-        console.log("Archived and deleted student");
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error while deleting student!');
+        res.status(500).send({
+            message: 'Error while archiving student!',
+            error: err
+        });
     }
 });
 
-router.use('/classes', classesRouter);
+router.use('/:student_id/classes', classesRouter);
 router.use('/times', timesRouter);
 
 

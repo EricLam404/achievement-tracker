@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
             day: day,
             time: time
         }};
-        const doc = await Student.findOneAndUpdate({_id: student_id}, {$push: update});
+        const doc = await Student.findOneAndUpdate({_id: student_id}, {$push: update}, { new: true });
         res.send(doc);
     } catch (err) {
         res.status(500).send({
@@ -27,7 +27,7 @@ router.delete('/:time_id', async (req, res) => {
                 'days': {
                     _id: time_id
                 }
-            }});
+            }}, { new: true });
         res.send(doc);
     } catch (err) {
         res.status(500).send({

@@ -1,36 +1,39 @@
-const router = require("express").Router();
+const router = require("express").Router({ mergeParams: true });
 const Student = require('../models/student');
 
 router.post('/', async (req, res) => {
-    const { id, day, time } = req.body;
-    const update = {};
-    update[`days`] = {
-        day: day,
-        time: time
-    };
-
     try {
-        const doc = await Student.findOneAndUpdate({_id: id}, {$push: update});
+        const { student_id } = req.params;
+        const { day, time } = req.body;
+        const update = {[`days`]: {
+            day: day,
+            time: time
+        }};
+        const doc = await Student.findOneAndUpdate({_id: student_id}, {$push: update});
         res.send(doc);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Error Adding Timeslot');
+        res.status(500).send({
+            message: 'Error Adding Timeslot',
+            error: err
+        });
     }
 });
 
-router.delete('/', async (req, res) => {
-    const { studentId, timeId } = req.body;
+router.delete('/:time_id', async (req, res) => {
     try {
-        const doc = await Student.findOneAndUpdate({_id: studentId},
+        const { student_id, time_id } = req.params;
+        const doc = await Student.findOneAndUpdate({_id: student_id},
             {$pull: {
                 'days': {
-                    _id: timeId
+                    _id: time_id
                 }
             }});
         res.send(doc);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Error Deleting Time');
+        res.status(500).send({
+            message: 'Error Deleting Time',
+            error: err
+        });
     }
 });
 

@@ -142,7 +142,7 @@ router.put('/archive/:student_id', async (req, res) => {
 });
 
 router.use('/:student_id/classes', classesRouter);
-router.use('/times', timesRouter);
+router.use('/:student_id/times', timesRouter);
 
 
 module.exports = router;

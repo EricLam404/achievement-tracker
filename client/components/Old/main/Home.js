@@ -1,9 +1,11 @@
+'use client'
+
 import React, { useEffect, useState} from 'react';
 import Schedule from '../admin/Schedule';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import Student from '../user/Student';
-import Header from './Header';
+import Header from '../../main/Header';
 
 function Home() {
     const [scheduleData, setScheduleData] = useState([]);

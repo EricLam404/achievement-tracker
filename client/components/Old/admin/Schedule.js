@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import Add from './Add';
 
 function Schedule({schedule, setUpdate}) {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    //console.log(schedule ? schedule : "loading");
     return (
         <div className="font-sans m-8 mx-auto max-w-80 flex flex-col justify-center items-center px-5">
             <div className='text-2xl font-bold mb-6'>Student List</div>
@@ -36,7 +35,7 @@ function Schedule({schedule, setUpdate}) {
                                                 <div className='flex flex-wrap justify-center items-center'>
                                                     {students.map((student, index) => {
                                                         return (
-                                                            <Link key={index} to={`/student/${student._id}`} state={{ student: student }}>
+                                                            <Link key={index} href={`/student/${student._id}`} state={{ student: student }}>
                                                                 <div className='text-sm m-2 p-2 rounded-sm bg-gray-200 hover:bg-gray-300'>{student.name}</div>
                                                             </Link>
                                                         )

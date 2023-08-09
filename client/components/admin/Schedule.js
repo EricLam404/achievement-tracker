@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Add from './Add';
+import Add from './buttons/Add';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -74,7 +74,15 @@ function Schedule() {
                                 <div className='flex flex-wrap justify-center items-center'>
                                 {students.map((student, index) => {
                                     return (
-                                        <Link key={index} href={`/student/${student._id}`} state={{ student: student }}>
+                                        <Link 
+                                            key={index} 
+                                            href={{
+                                                pathname: `/student/${student._id}`,
+                                                query: {
+                                                    student: JSON.stringify(student)
+                                                }
+                                            }} 
+                                        >
                                             <div className='text-sm m-2 p-2 rounded-sm bg-gray-200 hover:bg-gray-300'>{student.name}</div>
                                         </Link>
                                     )

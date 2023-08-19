@@ -6,7 +6,7 @@ import Delete from '@/components/admin/buttons/Delete';
 
 import Back from '@/components/main/buttons/Back';
 
-const page = ({params, searchParams}) => {
+const page = ({ searchParams }) => {
     const classNames = ['electronics', 'robotics', 'coding'];
     const student = JSON.parse(searchParams.student);
     const classes = student?.classes;
@@ -25,7 +25,7 @@ const page = ({params, searchParams}) => {
                         }
                     }} 
                     >
-                        <div className='"text-gray-700 no-underline px-10 py-5 m-5 rounded-lg bg-white shadow-md transition duration-300 ease-in-out hover:bg-gray-700 hover:text-white'>{_class[0].toUpperCase() + _class.substring(1)}</div>
+                        <div className='"text-gray-700 no-underline flex justify-center px-10 py-5 m-5 rounded-lg bg-white shadow-md transition duration-300 ease-in-out hover:bg-gray-700 hover:text-white'>{_class[0].toUpperCase() + _class.substring(1)}</div>
                     </Link>
                 ))}
             </ul>

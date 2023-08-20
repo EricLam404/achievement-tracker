@@ -98,7 +98,7 @@ function Schedule() {
                 <div>loading students</div>
             )}
             </div>
-            <Add />
+            <Add addType="Student" />
         </div>
     );
 }

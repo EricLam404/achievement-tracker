@@ -36,7 +36,7 @@ function Class({ searchParams }) {
             (
                 <div>No {classType} achievements</div>
             )}
-            <Add classNumber={classes?.length}/>
+            <Add addType={classType} classNumber={classes?.length}/>
             <Back/>
         </div>
     );

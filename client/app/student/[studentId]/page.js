@@ -38,7 +38,7 @@ const page = ({ searchParams }) => {
                         <Delete id={time._id} name="Time"/>
                     </li>
                 ))}
-                <Add />
+                <Add addType="Time"/>
             </ul>
             <div className='flex flex-col justify-center items-center m-4 space-y-6'>
                 <Delete id={student._id} name="Student"/>

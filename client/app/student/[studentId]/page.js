@@ -35,13 +35,13 @@ const page = ({ searchParams }) => {
                     <li className="bg-white rounded-lg shadow-md p-7 m-4 min-w-min justify-between flex flex-col items-center space-y-5" key={index}>
                         <div className='text-lg font-bold uppercase text-gray-600'>{time.day}</div>
                         <div className='text-base text-gray-400'>{time.time}</div>
-                        <Delete _id={time._id} _name="Time"/>
+                        <Delete id={time._id} name="Time"/>
                     </li>
                 ))}
                 <Add />
             </ul>
             <div className='flex flex-col justify-center items-center m-4 space-y-6'>
-                <Delete _name="Student"/>
+                <Delete id={student._id} name="Student"/>
                 <Archive />
             </div>
             <Back/>

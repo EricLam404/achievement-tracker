@@ -15,17 +15,17 @@ const page = ({ searchParams }) => {
         <div className="bg-gray-100 rounded-lg shadow-md p-8 flex flex-col items-center font-sans text-base text-gray-700 leading-relaxed">
             <div className='text-2xl font-bold mb-4'>Class List</div>
             <ul>
-                {classNames.map((_class, index) => (
+                {classNames.map((classType, index) => (
                     <Link 
                     key={index} 
                     href={{
-                        pathname: `class/${_class}`,
+                        pathname: `${student._id}/class/${classType}`,
                         query: {
-                            class: classes[_class]
+                            class: JSON.stringify(classes[classType])
                         }
                     }} 
                     >
-                        <div className='"text-gray-700 no-underline flex justify-center px-10 py-5 m-5 rounded-lg bg-white shadow-md transition duration-300 ease-in-out hover:bg-gray-700 hover:text-white'>{_class[0].toUpperCase() + _class.substring(1)}</div>
+                        <div className='"text-gray-700 no-underline flex justify-center px-10 py-5 m-5 rounded-lg bg-white shadow-md transition duration-300 ease-in-out hover:bg-gray-700 hover:text-white'>{classType[0].toUpperCase() + classType.substring(1)}</div>
                     </Link>
                 ))}
             </ul>

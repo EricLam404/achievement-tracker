@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
-import { useParams } from 'next/navigation';
 
-const AddClass = ({ handlePopup, handleSubmit }) => {
-    const classNames = ['electronics', 'robotics', 'coding'];
-    const { classType } = useParams();
-
+const AddClass = ({ handlePopup, handleAdd, classNumber }) => {
     //class
     const [classDate, setClassDate] = useState(new Date().toISOString().slice(0, 10));
     const [classAchievement, setClassAchievement] = useState('');
     const [classLesson, setClassLesson] = useState('');
     const [classLevel, setClassLevel] = useState('');
 
-    const newClass = {
-        id: id,
-        classNumber: (classNumber + 1),
-        classDate: classDate,
-        classAchievement: classAchievement,
-        classLesson: classLesson,
-        classLevel: classLevel,
-        classType: _class
-    };
+    function handleSubmit(){
+        const newClass = {
+            classNumber: (classNumber + 1),
+            classDate: classDate,
+            classAchievement: classAchievement,
+            classLesson: classLesson,
+            classLevel: classLevel
+        };
+        handleAdd(newClass);
+    }
 
     function handleCancel() {
         setClassAchievement('');
@@ -35,7 +32,7 @@ const AddClass = ({ handlePopup, handleSubmit }) => {
               <button className='
               px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-gray-600 cursor-pointer transition duration-300 ease-in-out
               '
-              type="submit">Add New {name}</button>
+              type="submit" onSubmit={handleSubmit}>Add New {name}</button>
               <button className='
               px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-red-500 cursor-pointer transition duration-300 ease-in-out
               '

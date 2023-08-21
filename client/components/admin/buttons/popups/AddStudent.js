@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddStudent = ({ handlePopup, handleSubmit }) => {
+const AddStudent = ({ handlePopup, handleAdd }) => {
     //student
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -12,24 +12,28 @@ const AddStudent = ({ handlePopup, handleSubmit }) => {
 
     const [day, setDay] = useState('');
     const [time, setTime] = useState('');
-    const newStudent = {
-        name: name,
-        email: email,
-        dob: dob,
-        age: age,
-        phone: phone,
-        address: address,
-        started: started,
-        days: [{
-            day: day,
-            time: time
-        }],
-        classes: {
-            robotics: [],
-            electronics: [],
-            coding: [],
-        }
-    } 
+
+    function handleSubmit(){
+        const newStudent = {
+            name: name,
+            email: email,
+            dob: dob,
+            age: age,
+            phone: phone,
+            address: address,
+            started: started,
+            days: [{
+                day: day,
+                time: time
+            }],
+            classes: {
+                robotics: [],
+                electronics: [],
+                coding: [],
+            }
+        } 
+        handleAdd(newStudent);
+    }
 
     function handleCancel() {
         setName('');
@@ -48,7 +52,7 @@ const AddStudent = ({ handlePopup, handleSubmit }) => {
               <button className='
               px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-gray-600 cursor-pointer transition duration-300 ease-in-out
               '
-              type="submit">Add New {name}</button>
+              type="submit" onSubmit={handleSubmit}>Add New {name}</button>
               <button className='
               px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-red-500 cursor-pointer transition duration-300 ease-in-out
               '

@@ -9,9 +9,9 @@ import AddStudent from './popups/AddStudent';
 const Add = ({ addType, classNumber }) => {
     const [showPopup, setShowPopup] = useState(false);
     //const { getAccessTokenSilently } = useAuth0();
-
+    
     //id and return
-    const { studentId } = useParams();
+    const { studentId, classType } = useParams();
     const router = useRouter();
 
     const classes = ['robotics', 'electronics', 'coding'];
@@ -21,12 +21,16 @@ const Add = ({ addType, classNumber }) => {
       setShowPopup(false);
     }
 
-    async function handleSubmit(event) {
-        event.preventDefault();
-
-        const url = "http://localhost:5001/api/student/add/" + (addClass ? `class/${_class}` : addStudent ? "student" : "time");
-        const body = addClass ?  newClass :  addStudent ? newStudent : newTime;
+    async function handleAdd(body) {
         //const token = await getAccessTokenSilently();
+        let url = `http://localhost:5001/api/students/${studentId}`
+        if(sectionType === "Class"){
+            url += `/classes/${classType}/${id}`;
+        }
+        else if(sectionType === "Time"){
+            url += `/times/${id}`;
+        }
+
         fetch(url, {
           method: 'POST',
           body: JSON.stringify(body),
@@ -56,9 +60,9 @@ const Add = ({ addType, classNumber }) => {
             <div className="fixed top-0 left-0 bottom-0 right-0 bg-opacity-50 flex items-center justify-center bg-white rounded-2xl shadow-md p-8 font-roboto backdrop-blur">
                 <div className="bg-white p-4 flex flex-col items-center rounded-md shadow-md text-black w-[calc(15vw + 300px)]">
                     {
-                      sectionType === "Class" ? <AddClass handleSubmit={handleSubmit} handlePopup={handlePopup}/>
-                      : sectionType === "Time" ? <AddTime handleSubmit={handleSubmit} handlePopup={handlePopup}/>
-                      : sectionType === "Student" ? <AddStudent handleSubmit={handleSubmit} handlePopup={handlePopup}/>
+                      sectionType === "Class" ? <AddClass handleAdd={handleAdd} handlePopup={handlePopup} classNumber={classNumber}/>
+                      : sectionType === "Time" ? <AddTime handleAdd={handleAdd} handlePopup={handlePopup}/>
+                      : sectionType === "Student" ? <AddStudent handleAdd={handleAdd} handlePopup={handlePopup}/>
                       : <div>Error Adding</div>
                     }
                 </div>

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 
-const AddTime = ({ handlePopup, handleSubmit}) => {
+const AddTime = ({ handlePopup, handleAdd}) => {
     //time
     const [day, setDay] = useState('');
     const [time, setTime] = useState('');
 
-    const newTime = {
-        id: id,
-        day: day,
-        time: time
-    };
+    function handleSubmit(){
+        const newTime = {
+            day: day,
+            time: time
+        };
+
+        handleAdd(newTime);
+    }
 
     function handleCancel() {
         setDay('');
@@ -24,7 +27,7 @@ const AddTime = ({ handlePopup, handleSubmit}) => {
               <button className='
               px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-gray-600 cursor-pointer transition duration-300 ease-in-out
               '
-              type="submit">Add New {name}</button>
+              type="submit" onSubmit={handleSubmit}>Add New {name}</button>
               <button className='
               px-10 py-2 mx-4 my-0 border-none rounded-md text-lg font-bold text-white bg-red-500 cursor-pointer transition duration-300 ease-in-out
               '

@@ -1,34 +1,33 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState , useContext } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import AddClass from './popups/AddClass';
 import AddTime from './popups/AddTime';
 import AddStudent from './popups/AddStudent';
 
-const Add = ({ addType, classNumber }) => {
+const Add = ({ addType, classNumber, handleChanged }) => {
     const [showPopup, setShowPopup] = useState(false);
     //const { getAccessTokenSilently } = useAuth0();
     
     //id and return
     const { studentId, classType } = useParams();
-    const router = useRouter();
+    const { push } = useRouter();
 
     const classes = ['robotics', 'electronics', 'coding'];
     const sectionType = classes.includes(addType) ? "Class" : addType;
-
     function handlePopup(){
       setShowPopup(false);
     }
 
     async function handleAdd(body) {
         //const token = await getAccessTokenSilently();
-        let url = `http://localhost:5001/api/students/${studentId}`
+        let url = `http://localhost:5001/api/students`
         if(sectionType === "Class"){
-            url += `/classes/${classType}/${id}`;
+          url += `/${studentId}/classes/${classType}`;
         }
         else if(sectionType === "Time"){
-            url += `/times/${id}`;
+          url += `/${studentId}/times`;
         }
 
         fetch(url, {
@@ -40,7 +39,8 @@ const Add = ({ addType, classNumber }) => {
         })
         .then((response) => response.text())
         .then((message) => {
-            router.replace('/');
+          push('/');
+          if(addType === "Student") handleChanged();
         })
         .catch((error) => {
             console.error(error);

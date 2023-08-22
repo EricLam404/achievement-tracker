@@ -7,32 +7,45 @@ const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 function Schedule() {
     const [updated, setUpdated] = useState(false);
     const [schedule, setSchedule] = useState(null);
+    const [changed, setChanged] = useState(false);
+
+    const fetchData = async () => {
+        try{
+            const url = 'http://localhost:5001/api/students';
+            /* 
+            const token = await getAccessTokenSilently();
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            })
+            */
+            const response = await fetch(url, {
+                method: 'GET'
+            })
+            const jsonData = await response.json();
+            setSchedule(jsonData);
+        } catch (e){
+            console.log(e);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try{
-                const url = 'http://localhost:5001/api/students';
-                /* 
-                const token = await getAccessTokenSilently();
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        authorization: `Bearer ${token}`,
-                    },
-                })
-                */
-                const response = await fetch(url, {
-                    method: 'GET'
-                })
-                const jsonData = await response.json();
-                setSchedule(jsonData);
-            } catch (e){
-                console.log(e);
-            }
-        };
         if(!updated) fetchData();
         setUpdated(true);
     }, []);
+
+    useEffect(() => {
+        if(changed){
+            fetchData();
+            setChanged(false);
+        }
+    }, [changed]);
+
+    const handleChanged = () => {
+        setChanged(true);
+    }
 
     const getTimes = (day, daySchedule) => {
         const times = daySchedule
@@ -98,7 +111,7 @@ function Schedule() {
                 <div>loading students</div>
             )}
             </div>
-            <Add addType="Student" />
+            <Add addType="Student" handleChanged={handleChanged}/>
         </div>
     );
 }

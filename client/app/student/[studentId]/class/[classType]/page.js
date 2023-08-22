@@ -8,10 +8,11 @@ import Delete from '@/components/admin/buttons/Delete';
 import Back from '@/components/main/buttons/Back';
 
 function Class({ searchParams }) {
-    const classes = JSON.parse(searchParams.class);
+    const classes = searchParams.class ? JSON.parse(searchParams.class) : null;
     const { classType } = useParams();
 
     return (
+        classes ? 
         <div className="flex flex-col items-center">
             <div className='text-4xl font-bold mb-8"'>{"Class: " + classType[0].toUpperCase() + classType.substring(1)}</div>
             {classes ? (
@@ -39,6 +40,7 @@ function Class({ searchParams }) {
             <Add addType={classType} classNumber={classes?.length}/>
             <Back/>
         </div>
+        : <div>Error loading classes</div>
     );
 }
 

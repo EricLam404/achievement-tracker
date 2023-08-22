@@ -6,12 +6,13 @@ import Delete from '@/components/admin/buttons/Delete';
 
 import Back from '@/components/main/buttons/Back';
 
-const page = ({ searchParams }) => {
+const Page = ({ searchParams }) => {
     const classNames = ['electronics', 'robotics', 'coding'];
-    const student = JSON.parse(searchParams.student);
+    const student = searchParams.student ? JSON.parse(searchParams.student) : null;
     const classes = student?.classes;
     const time = student?.days;
     return (
+        student ? 
         <div className="bg-gray-100 rounded-lg shadow-md p-8 flex flex-col items-center font-sans text-base text-gray-700 leading-relaxed">
             <div className='text-2xl font-bold mb-4'>Class List</div>
             <ul>
@@ -46,7 +47,8 @@ const page = ({ searchParams }) => {
             </div>
             <Back/>
         </div>
+        : <div>Student not found</div>
     );
 }
 
-export default page;
+export default Page;

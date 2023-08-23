@@ -68,7 +68,7 @@ function CurrentStudents() {
     };
 
     return (
-        <div className="font-sans m-8 mx-auto max-w-80 flex flex-col justify-center items-center px-5">
+        <div className="font-sans m-8 mx-auto w-full flex flex-col justify-center items-center px-5">
             <div className='text-2xl font-bold mb-6'>Current Student List</div>
             <div className='grid grid-auto-fit-[200px] gap-4 w-full'>
             {schedule ? (

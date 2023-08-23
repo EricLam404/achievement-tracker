@@ -10,10 +10,10 @@ const Students = () => {
     }
 
     return (
-        <>
-            <button className='btn' onClick={handleDisplay}>Show {displayCurrent ? "Archieved" : "Current"} Students</button>
+        <div className='flex flex-col w-full items-center'>
+            <button className='btn w-[30%] mt-5' onClick={handleDisplay}>Show {displayCurrent ? "Archieved" : "Current"} Students</button>
             {displayCurrent ? <CurrentStudents /> : <ArchievedStudents/> }
-        </>
+        </div>
     )
 }
 

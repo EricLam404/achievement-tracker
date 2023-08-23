@@ -33,9 +33,9 @@ function ArchievedStudents() {
     }, []);
 
     return (
-        <div className="font-sans m-8 mx-auto max-w-80 flex flex-col justify-center items-center px-5">
+        <div className="font-sans m-8 mx-auto w-full flex flex-col justify-center items-center px-5">
             <div className='text-2xl font-bold mb-6'>Archieved Student List</div>
-            <div className='grid grid-auto-fit-[200px] gap-4 w-full'>
+            <div className='flex flex-col'>
             {schedule ? (
                 schedule.map((archievedStudent, index) => {
                     const student = archievedStudent.student;
@@ -43,13 +43,13 @@ function ArchievedStudents() {
                         <Link 
                             key={index} 
                             href={{
-                                pathname: `/student/${student._id}`,
+                                pathname: `/archieved/${student._id}`,
                                 query: {
                                     student: JSON.stringify(student)
                                 }
                             }} 
                         >
-                            <div className='text-sm m-2 p-2 rounded-sm bg-gray-200 hover:bg-gray-300'>{student.name}</div>
+                            <div className='text-lg font-semibold m-2 p-5 rounded-sm bg-gray-200 hover:bg-gray-300'>{student.name}</div>
                         </Link>
                     )
                 })

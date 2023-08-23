@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import Schedule from '../admin/Schedule'
+import Students from '../admin/Students'
 
 const Home = () => {
   return (
     <div>
-        <Schedule />
+        <Students />
     </div>
   )
 }

@@ -4,7 +4,7 @@ import Add from './buttons/Add';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-function Schedule() {
+function CurrentStudents() {
     const [updated, setUpdated] = useState(false);
     const [schedule, setSchedule] = useState(null);
     const [changed, setChanged] = useState(false);
@@ -69,7 +69,7 @@ function Schedule() {
 
     return (
         <div className="font-sans m-8 mx-auto max-w-80 flex flex-col justify-center items-center px-5">
-            <div className='text-2xl font-bold mb-6'>Student List</div>
+            <div className='text-2xl font-bold mb-6'>Current Student List</div>
             <div className='grid grid-auto-fit-[200px] gap-4 w-full'>
             {schedule ? (
                 days.map((day, index) => {
@@ -116,4 +116,4 @@ function Schedule() {
     );
 }
 
-export default Schedule;
+export default CurrentStudents;

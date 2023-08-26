@@ -14,7 +14,8 @@ const Page = ({ searchParams }) => {
     return (
         student ? 
         <div className="bg-gray-100 rounded-lg shadow-md p-8 flex flex-col items-center font-sans text-base text-gray-700 leading-relaxed">
-            <div className='text-2xl font-bold mb-4'>Class List</div>
+            <div className='text-2xl mb-4'>Student id: {student?._id}</div>
+            <div className='text-2xl font-bold mb-4'>Classes</div>
             <ul>
                 {classNames.map((classType, index) => (
                     <Link 

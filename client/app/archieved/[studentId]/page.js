@@ -7,10 +7,16 @@ const Page = ({ searchParams }) => {
     const student = searchParams.student ? JSON.parse(searchParams.student) : null;
     const classes = student?.classes;
     const time = student?.days;
+    for(let i = 0; i < classNames.length; i++){
+        if(student.classes[classNames[i]].length === 0){
+            classNames.splice(i, 1);
+        }
+    }
+
     return (
         student ? 
         <div className="bg-gray-100 rounded-lg shadow-md p-8 flex flex-col items-center font-sans text-base text-gray-700 leading-relaxed">
-            <div className='text-2xl font-bold mb-4'>Class List</div>
+            <div className='text-2xl font-bold mb-4'>Classes</div>
             <ul>
                 {classNames.map((classType, index) => (
                     <Link 

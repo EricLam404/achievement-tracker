@@ -8,6 +8,7 @@ function CurrentStudents() {
     const [updated, setUpdated] = useState(false);
     const [schedule, setSchedule] = useState(null);
     const [changed, setChanged] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const fetchData = async () => {
         try{
@@ -27,6 +28,7 @@ function CurrentStudents() {
             const jsonData = await response.json();
             setSchedule(jsonData);
         } catch (e){
+            setErrorMessage(e);
             console.log(e);
         }
     };
@@ -108,7 +110,15 @@ function CurrentStudents() {
                 )})
             ) :
             (
-                <div>loading students</div>
+                <>
+                    <div>loading students</div>
+                    {errorMessage &&
+                        <>
+                            <div>Error:</div>
+                            <div>{JSON.stringify(errorMessage)}</div>
+                        </>
+                    }
+                </>
             )}
             </div>
             <Add addType="Student" handleChanged={handleChanged}/>

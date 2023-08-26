@@ -1,20 +1,43 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import Add from '@/components/admin/buttons/Add';
 import Archive from '@/components/admin/buttons/Archive';
 import Delete from '@/components/admin/buttons/Delete';
-
 import Back from '@/components/main/buttons/Back';
+import QRCode from 'qrcode';
 
 const Page = ({ searchParams }) => {
     const classNames = ['electronics', 'robotics', 'coding'];
     const student = searchParams.student ? JSON.parse(searchParams.student) : null;
     const classes = student?.classes;
     const time = student?.days;
+
+    const [qrCode, setqrCode] = useState("");
+    const [updated, setUpdated] = useState(false);
+    const link = `http://localhost:3000/${student?._id}`;
+
+    const generateQRCode = async () => {
+        try {
+            const qrCodeDataURL = await QRCode.toDataURL(link);
+            setqrCode(qrCodeDataURL);
+            setUpdated(true);
+        } catch (error) {
+            console.error('Error generating QR code:', error);
+        }
+    };
+
+    useEffect(()=> {
+        if(!updated) generateQRCode();
+    }, []);
+
     return (
         student ? 
         <div className="bg-gray-100 rounded-lg shadow-md p-8 flex flex-col items-center font-sans text-base text-gray-700 leading-relaxed">
             <div className='text-2xl mb-4'>Student id: {student?._id}</div>
+            <div>QR Code: </div>
+            {qrCode && <img src={qrCode} alt="QR Code" />}
             <div className='text-2xl font-bold mb-4'>Classes</div>
             <ul>
                 {classNames.map((classType, index) => (

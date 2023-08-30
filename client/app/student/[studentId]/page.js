@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Link from 'next/link';
 import Add from '@/components/admin/buttons/Add';
 import Archive from '@/components/admin/buttons/Archive';
 import Delete from '@/components/admin/buttons/Delete';
 import Back from '@/components/main/buttons/Back';
 import QRCode from 'qrcode';
+import ReactToPrint from 'react-to-print';
 
 const Page = ({ searchParams }) => {
     const classNames = ['electronics', 'robotics', 'coding'];
@@ -17,6 +18,8 @@ const Page = ({ searchParams }) => {
     const [qrCode, setqrCode] = useState("");
     const [updated, setUpdated] = useState(false);
     const link = `http://localhost:3000/${student?._id}`;
+
+    const componentRef = useRef();
 
     const generateQRCode = async () => {
         try {
@@ -36,8 +39,15 @@ const Page = ({ searchParams }) => {
         student ? 
         <div className="bg-gray-100 rounded-lg shadow-md p-8 flex flex-col items-center font-sans text-base text-gray-700 leading-relaxed">
             <div className='text-2xl mb-4'>Student id: {student?._id}</div>
-            <div>QR Code: </div>
-            {qrCode && <img src={qrCode} alt="QR Code" />}
+            <ReactToPrint
+                trigger={() => <button className='btn bg-gray-300 hover:bg-gray-400'>Print Student QR Code Out</button>}
+                content={() => componentRef.current}
+            />
+            <div ref={componentRef} className='flex flex-col justify-center items-center'>
+                <div className='text-lg'>Student: {student?.name}</div>
+                <div>QR Code: </div>
+                {qrCode && <img src={qrCode} alt="QR Code" />}
+            </div>
             <div className='text-2xl font-bold mb-4'>Classes</div>
             <ul>
                 {classNames.map((classType, index) => (

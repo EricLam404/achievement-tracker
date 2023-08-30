@@ -32,7 +32,7 @@ const Archive = () => {
 
     return (
         <div>
-        <button className="btn bg-gray-400" onClick={() => setShowArchive(true)}>Archive Student</button>
+        <button className="btn bg-gray-300 hover:bg-gray-400" onClick={() => setShowArchive(true)}>Archive Student</button>
         {showArchive && (
             <div className="fixed top-0 left-0 bottom-0 right-0 bg-opacity-50 flex items-center justify-center bg-white rounded-2xl shadow-md p-8 font-roboto backdrop-blur">
             <div className="bg-white p-4 rounded-md shadow-md text-black w-[calc(15vw + 300px)]">

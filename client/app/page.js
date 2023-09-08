@@ -8,9 +8,7 @@ export default withPageAuthRequired(async function Page() {
     return (
         <main>
             {user ? 
-                <>
-                    <Home />
-                </> :
+                <Home /> :
                 <a className="btn" href="/api/auth/login">Login</a>
             }
         </main>

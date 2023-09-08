@@ -79,6 +79,59 @@ const Page = ({ searchParams }) => {
                 <Delete id={student._id} name="Student"/>
                 <Archive />
             </div>
+            <div>
+                <h1 className='text-xl font-semibold'>Student Information</h1>
+                <div className='flex flex-col gap-2'>
+                    <div className='flex gap-1'>
+                        <div className='font-semibold'>
+                            E-mail: 
+                        </div>
+                        <div className=''>
+                            {student.email} 
+                        </div>
+                    </div>
+                    <div className='flex gap-1'>
+                        <div className='font-semibold'>
+                            Date of birth: 
+                        </div>
+                        <div className=''>
+                            {student.dob}
+                        </div>
+                    </div>
+                    <div className='flex gap-1'>
+                        <div className='font-semibold'>
+                            Age: 
+                        </div>
+                        <div className=''>
+                            {student.age}
+                        </div>
+                    </div>
+                    <div className='flex gap-1'>
+                        <div className='font-semibold'>
+                            Phone Number: 
+                        </div>
+                        <div className=''>
+                            {student.phone}  
+                        </div>
+                    </div>
+                    <div className='flex gap-1'>
+                        <div className='font-semibold'>
+                            Address: 
+                        </div>
+                        <div className=''>
+                            {student.address} 
+                        </div>
+                    </div>
+                    <div className='flex gap-1'>
+                        <div className='font-semibold'>
+                            Started: 
+                        </div>
+                        <div className=''>
+                            {student.started.substr(0, 10)}
+                        </div>
+                    </div>
+                </div>
+            </div>
             <Back/>
         </div>
         : <div>Student not found</div>

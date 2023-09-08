@@ -1,9 +1,9 @@
 import Footer from "@/components/main/Footer";
 import Header from "@/components/main/Header";
 import Home from "@/components/main/Home";
-import { getSession } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
-export default async function Page() {
+export default withPageAuthRequired(async function Page() {
     const session = await getSession();
     const user = session ? session.user : null;
 
@@ -15,11 +15,8 @@ export default async function Page() {
                     <Home />
                     <Footer />
                 </> :
-                <>
-                    <a className="btn" href="/api/auth/login">Login</a>
-                    <a className="btn" href="/api/auth/logout">Logout</a>
-                </>
+                <a className="btn" href="/api/auth/login">Login</a>
             }
         </main>
     )
-}
+}, { returnTo: '' })

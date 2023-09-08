@@ -1,6 +1,8 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import Header from '@/components/main/Header';
+import Footer from '@/components/main/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,7 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <UserProvider>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Header />
+          {children}
+          <Footer />
+        </body>
       </UserProvider>
     </html>
   )

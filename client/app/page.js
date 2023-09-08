@@ -1,5 +1,3 @@
-import Footer from "@/components/main/Footer";
-import Header from "@/components/main/Header";
 import Home from "@/components/main/Home";
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
@@ -11,9 +9,7 @@ export default withPageAuthRequired(async function Page() {
         <main>
             {user ? 
                 <>
-                    <Header />
                     <Home />
-                    <Footer />
                 </> :
                 <a className="btn" href="/api/auth/login">Login</a>
             }

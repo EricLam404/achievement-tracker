@@ -1,18 +1,14 @@
-import React, { useState } from 'react'
-import ArchievedStudents from './ArchivedStudents';
+import React from 'react'
 import CurrentStudents from './CurrentStudents';
+import Link from 'next/link';
 
 const Students = () => {
-    const [displayCurrent, setDisplayCurrent] = useState(true);
-
-    const handleDisplay = () => {
-        setDisplayCurrent(() => !displayCurrent);
-    }
-
-    return (
+    return(
         <div className='flex flex-col w-full items-center'>
-            <button className='btn w-[30%] mt-5' onClick={handleDisplay}>Show {displayCurrent ? "Archieved" : "Current"} Students</button>
-            {displayCurrent ? <CurrentStudents /> : <ArchievedStudents/> }
+            <Link href='/archieved'>
+                <div className='btn mt-5'>Show Archieved Students</div>
+            </Link>
+            <CurrentStudents />
         </div>
     )
 }

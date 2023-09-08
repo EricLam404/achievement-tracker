@@ -17,7 +17,9 @@ export default function RootLayout({ children }) {
       <UserProvider>
         <body className={inter.className}>
           <Header />
-          {children}
+          <div className='min-h-[100vh]'>
+            {children}
+          </div>
           <Footer />
         </body>
       </UserProvider>

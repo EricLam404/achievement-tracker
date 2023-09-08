@@ -9,16 +9,17 @@ import Loading from '@/components/main/Loading'
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 const Page = ({ searchParams }) => {
-    const classNames = ['electronics', 'robotics', 'coding'];
+    const classNames = [];
     const student = searchParams.student ? JSON.parse(searchParams.student) : null;
     const classes = student?.classes;
     const time = student?.days;
-    for(let i = 0; i < classNames.length; i++){
-        if(student.classes[classNames[i]].length === 0){
-            classNames.splice(i, 1);
+    const { user, isLoading } = useUser();
+
+    for (const key in classes) {
+        if (classes[key].length > 0) {
+            classNames.push(key);
         }
     }
-    const { user, isLoading } = useUser();
 
     return (
         <>

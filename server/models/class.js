@@ -5,15 +5,15 @@ const Schema = mongoose.Schema;
 const classSchema = new Schema({
     classNumber: {
         type: Number,
-        required: true
+        required: true,
     },
     classDate: {
         type: Date,
-        required: true
+        required: true,
     },
     classAchievement: {
         type: String,
-        required: true
+        required: true,
     },
     classLevel: {
         type: String,
@@ -21,8 +21,8 @@ const classSchema = new Schema({
     },
     classLesson: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 });
 
 module.exports = mongoose.model("Class", classSchema);

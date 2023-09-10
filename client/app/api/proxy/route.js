@@ -7,9 +7,12 @@ export async function GET(req) {
     const path = req.nextUrl.pathname.replace("/api/", "");
     const EXTERNAL_API_URL = "http://localhost:5001";
 
-    return await fetch(`https:/${EXTERNAL_API_URL}/${path}${req.nextUrl.search}`, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
+    return await fetch(
+        `https:/${EXTERNAL_API_URL}/${path}${req.nextUrl.search}`,
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
 }

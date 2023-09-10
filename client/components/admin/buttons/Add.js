@@ -1,77 +1,91 @@
-'use client'
+"use client";
 
-import React, { useState , useContext } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import AddClass from './popups/AddClass';
-import AddTime from './popups/AddTime';
-import AddStudent from './popups/AddStudent';
+import React, { useState, useContext } from "react";
+import { useParams, useRouter } from "next/navigation";
+import AddClass from "./popups/AddClass";
+import AddTime from "./popups/AddTime";
+import AddStudent from "./popups/AddStudent";
 
 const Add = ({ addType, classNumber, handleChanged }) => {
     const [showPopup, setShowPopup] = useState(false);
     //const { getAccessTokenSilently } = useAuth0();
-    
+
     //id and return
     const { studentId, classType } = useParams();
     const { push } = useRouter();
 
-    const classes = ['robotics', 'electronics', 'coding'];
+    const classes = ["robotics", "electronics", "coding"];
     const sectionType = classes.includes(addType) ? "Class" : addType;
-    function handlePopup(){
-      setShowPopup(false);
+    function handlePopup() {
+        setShowPopup(false);
     }
 
     async function handleAdd(body) {
         //const token = await getAccessTokenSilently();
-        let url = `http://localhost:5001/api/students`
-        if(sectionType === "Class"){
-          url += `/${studentId}/classes/${classType}`;
-        }
-        else if(sectionType === "Time"){
-          url += `/${studentId}/times`;
+        let url = `http://localhost:5001/api/students`;
+        if (sectionType === "Class") {
+            url += `/${studentId}/classes/${classType}`;
+        } else if (sectionType === "Time") {
+            url += `/${studentId}/times`;
         }
 
         fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(body),
-          headers: {
-              'Content-Type': 'application/json'
-          },
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json",
+            },
         })
-        .then((response) => response.text())
-        .then((message) => {
-          push('/');
-          if(addType === "Student") handleChanged();
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+            .then((response) => response.text())
+            .then((message) => {
+                push("/");
+                if (addType === "Student") handleChanged();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
 
         handlePopup();
     }
 
     return (
-        <div className='flex justify-center items-center'>
-        
-        <button className='
+        <div className="flex justify-center items-center">
+            <button
+                className="
         fixed bottom-4 right-4 inline-block bg-gray-700 text-white rounded-[0.5rem] text-lg px-8 py-4 shadow-md transition-all duration-200 ease-in-out cursor-pointer text-center
-        ' 
-        onClick={() => setShowPopup(true)}>Add {sectionType}</button>
-        {showPopup && (
-            <div className="fixed top-0 left-0 bottom-0 right-0 bg-opacity-50 flex items-center justify-center bg-white rounded-2xl shadow-md p-8 font-roboto backdrop-blur">
-                <div className="bg-white p-4 flex flex-col items-center rounded-md shadow-md text-black w-[calc(15vw + 300px)]">
-                    {
-                      sectionType === "Class" ? <AddClass handleAdd={handleAdd} handlePopup={handlePopup} classNumber={classNumber}/>
-                      : sectionType === "Time" ? <AddTime handleAdd={handleAdd} handlePopup={handlePopup}/>
-                      : sectionType === "Student" ? <AddStudent handleAdd={handleAdd} handlePopup={handlePopup}/>
-                      : <div>Error Adding</div>
-                    }
+        "
+                onClick={() => setShowPopup(true)}
+            >
+                Add {sectionType}
+            </button>
+            {showPopup && (
+                <div className="fixed top-0 left-0 bottom-0 right-0 bg-opacity-50 flex items-center justify-center bg-white rounded-2xl shadow-md p-8 font-roboto backdrop-blur">
+                    <div className="bg-white p-4 flex flex-col items-center rounded-md shadow-md text-black w-[calc(15vw + 300px)]">
+                        {sectionType === "Class" ? (
+                            <AddClass
+                                handleAdd={handleAdd}
+                                handlePopup={handlePopup}
+                                classNumber={classNumber}
+                            />
+                        ) : sectionType === "Time" ? (
+                            <AddTime
+                                handleAdd={handleAdd}
+                                handlePopup={handlePopup}
+                            />
+                        ) : sectionType === "Student" ? (
+                            <AddStudent
+                                handleAdd={handleAdd}
+                                handlePopup={handlePopup}
+                            />
+                        ) : (
+                            <div>Error Adding</div>
+                        )}
+                    </div>
                 </div>
-            </div>
-        )}
+            )}
         </div>
     );
-}
-
+};
 
 export default Add;
 

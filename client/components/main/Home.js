@@ -1,13 +1,13 @@
-'use client'
-import React from 'react'
-import Students from '../admin/Students'
+"use client";
+import React from "react";
+import Students from "../admin/Students";
 
 const Home = () => {
-  return (
-    <div>
-        <Students />
-    </div>
-  )
-}
+    return (
+        <div>
+            <Students />
+        </div>
+    );
+};
 
-export default Home
+export default Home;

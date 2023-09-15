@@ -12,7 +12,7 @@ const Delete = ({ id, name }) => {
     const sectionType = classes.includes(name) ? "Class" : name;
 
     async function deleteId() {
-        let url = `http://localhost:5001/api/students/${studentId}`;
+        let url = `api/students/${studentId}`;
         let body = {};
         if (sectionType === "Class") {
             url += `/classes/${name}/${id}`;
@@ -25,12 +25,12 @@ const Delete = ({ id, name }) => {
         }
         //const token = await getAccessTokenSilently();
 
-        fetch(url, {
+        fetch(`/api/proxy/?route=${url}`, {
             method: "DELETE",
-            body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify(body),
         })
             .then((response) => response.text())
             .then((message) => {

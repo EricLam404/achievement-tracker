@@ -7,19 +7,11 @@ function ArchievedStudents() {
 
     const fetchData = async () => {
         try {
-            const url = "http://localhost:5001/api/students/archieved";
-            /* 
-            const token = await getAccessTokenSilently();
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    authorization: `Bearer ${token}`,
-                },
-            })
-            */
-            const response = await fetch(url, {
+            const url = "api/students/archieved";
+            const response = await fetch(`/api/proxy/?route=${url}`, {
                 method: "GET",
             });
+            
             const jsonData = await response.json();
             setSchedule(jsonData);
         } catch (e) {

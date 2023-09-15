@@ -12,14 +12,11 @@ const Archive = () => {
     const { studentId } = useParams();
 
     async function archiveId() {
-        const url = `http://localhost:5001/api/students/archive/${studentId}`;
+        const url = `api/students/archive/${studentId}`;
         //const token = await getAccessTokenSilently();
 
-        fetch(url, {
+        fetch(`/api/proxy/?route=${url}`, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
         })
             .then((response) => response.text())
             .then((message) => {

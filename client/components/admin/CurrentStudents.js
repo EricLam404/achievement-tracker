@@ -20,22 +20,9 @@ function CurrentStudents() {
 
     const fetchData = async () => {
         try {
-            const url = "http://localhost:5001/api/students";
-            /* 
-            const token = await getAccessTokenSilently();
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    authorization: `Bearer ${token}`,
-                },
-            })
-            
-            const response = await fetch(url, {
-                method: "GET",
-            });
-            */
-            const response = await fetch("/api/proxy/?route=api/students&method=GET", {
-                method: "GET",
+            const url = "api/students";
+            const response = await fetch(`/api/proxy/?route=${url}`, {
+                method: "GET"
             });
             const jsonData = await response.json();
             setSchedule(jsonData);

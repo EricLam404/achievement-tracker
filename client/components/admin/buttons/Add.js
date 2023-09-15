@@ -8,9 +8,6 @@ import AddStudent from "./popups/AddStudent";
 
 const Add = ({ addType, classNumber, handleChanged }) => {
     const [showPopup, setShowPopup] = useState(false);
-    //const { getAccessTokenSilently } = useAuth0();
-
-    //id and return
     const { studentId, classType } = useParams();
     const { push } = useRouter();
 
@@ -21,20 +18,18 @@ const Add = ({ addType, classNumber, handleChanged }) => {
     }
 
     async function handleAdd(body) {
-        //const token = await getAccessTokenSilently();
-        let url = `http://localhost:5001/api/students`;
+        let url = `api/students`;
         if (sectionType === "Class") {
             url += `/${studentId}/classes/${classType}`;
         } else if (sectionType === "Time") {
             url += `/${studentId}/times`;
         }
-
-        fetch(url, {
+        fetch(`/api/proxy/?route=${url}`, {
             method: "POST",
-            body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify(body),
         })
             .then((response) => response.text())
             .then((message) => {

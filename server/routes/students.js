@@ -125,6 +125,7 @@ router.get("/:student_id", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
+        console.log(req.body)
         const {
             name,
             email,
@@ -149,7 +150,7 @@ router.post("/", async (req, res) => {
             classes: classes,
         });
         const student = await studentObject.save();
-        res.send(student);
+        res.status(200).send(student);
     } catch (err) {
         res.status(500).send({
             message: "Error Adding Student",

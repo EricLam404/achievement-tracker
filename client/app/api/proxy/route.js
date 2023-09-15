@@ -1,21 +1,61 @@
 import { getAccessToken } from "@auth0/nextjs-auth0";
 import { NextResponse } from "next/server";
 
+const EXTERNAL_API_URL = "http://localhost:5001";
+
 export async function GET(req) {
     const res = new NextResponse();
     const { accessToken } = await getAccessToken(req, res);
-    const EXTERNAL_API_URL = "http://localhost:5001";
     const path = req.nextUrl.searchParams.get('route');
-    const method = req.nextUrl.searchParams.get('method');
-    const request = {
-        method: method,
+
+    return await fetch(`${EXTERNAL_API_URL}/${path}`, {
+        method: "GET",
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
-    }
-    if(method === "POST" || method === "PUT" || method === "PATCh"){
-        const body = req.nextUrl.searchParams.get('body');
-        request['body'] = JSON.stringify(body);
-    }
-    return await fetch(`${EXTERNAL_API_URL}/${path}`, request);
+    });
 }
+
+export async function POST(req) {
+    const res = new NextResponse();
+    const { accessToken } = await getAccessToken(req, res);
+    const path = req.nextUrl.searchParams.get('route');
+
+    return await fetch(`${EXTERNAL_API_URL}/${path}`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(body)
+    });
+}
+
+export async function PUT(req) {
+    const res = new NextResponse();
+    const { accessToken } = await getAccessToken(req, res);
+    const path = req.nextUrl.searchParams.get('route');
+    
+    return await fetch(`${EXTERNAL_API_URL}/${path}`, {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(body)
+    });
+}
+
+
+export async function DELETE(req) {
+    const res = new NextResponse();
+    const { accessToken } = await getAccessToken(req, res);
+    const path = req.nextUrl.searchParams.get('route');
+    
+    return await fetch(`${EXTERNAL_API_URL}/${path}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(body)
+    });
+}
+

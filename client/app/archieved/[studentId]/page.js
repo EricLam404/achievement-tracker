@@ -2,8 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-
-import Back from "@/components/main/buttons/Back";
 import ErrorMessage from "@/components/main/ErrorMessage";
 import Loading from "@/components/main/Loading";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
@@ -68,7 +66,6 @@ const Page = ({ searchParams }) => {
                                 </li>
                             ))}
                         </ul>
-                        <Back />
                     </div>
                 ) : (
                     <div>Student not found</div>

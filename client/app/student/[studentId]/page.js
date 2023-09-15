@@ -5,7 +5,6 @@ import Link from "next/link";
 import Add from "@/components/admin/buttons/Add";
 import Archive from "@/components/admin/buttons/Archive";
 import Delete from "@/components/admin/buttons/Delete";
-import Back from "@/components/main/buttons/Back";
 import ErrorMessage from "@/components/main/ErrorMessage";
 import Loading from "@/components/main/Loading";
 
@@ -155,7 +154,6 @@ const Page = ({ searchParams }) => {
                                 </div>
                             </div>
                         </div>
-                        <Back />
                     </div>
                 ) : (
                     <div>Student not found</div>

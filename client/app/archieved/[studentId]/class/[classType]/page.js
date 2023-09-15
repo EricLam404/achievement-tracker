@@ -2,8 +2,6 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
-
-import Back from "@/components/main/buttons/Back";
 import ErrorMessage from "@/components/main/ErrorMessage";
 import Loading from "@/components/main/Loading";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
@@ -65,7 +63,6 @@ function Page({ searchParams }) {
                         ) : (
                             <div>No {classType} achievements</div>
                         )}
-                        <Back />
                     </div>
                 ) : (
                     <div>Error loading classes</div>

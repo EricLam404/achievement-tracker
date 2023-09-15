@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
-import Back from "@/components/main/buttons/Back";
 
 function Class({ searchParams }) {
     const classes = searchParams.class ? JSON.parse(searchParams.class) : null;
@@ -53,7 +52,6 @@ function Class({ searchParams }) {
             ) : (
                 <div>No {classType} achievements</div>
             )}
-            <Back />
         </div>
     ) : (
         <div>Error loading classes</div>

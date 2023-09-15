@@ -16,7 +16,6 @@ function Page() {
             {user && (
                 <div className="flex flex-col items-center">
                     <ArchievedStudents />
-                    <Back />
                 </div>
             )}
         </>

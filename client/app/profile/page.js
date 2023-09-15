@@ -18,7 +18,6 @@ const Page = () => {
                     <a className="btn" href="/api/auth/logout">
                         Logout
                     </a>
-                    <Back />
                 </>
             )}
         </>

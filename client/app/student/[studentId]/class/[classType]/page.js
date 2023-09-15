@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 
 import Add from "@/components/admin/buttons/Add";
 import Delete from "@/components/admin/buttons/Delete";
-import Back from "@/components/main/buttons/Back";
 import ErrorMessage from "@/components/main/ErrorMessage";
 import Loading from "@/components/main/Loading";
 
@@ -76,7 +75,6 @@ function Page({ searchParams }) {
                             addType={classType}
                             classNumber={classes?.length}
                         />
-                        <Back />
                     </div>
                 ) : (
                     <div>Error loading classes</div>

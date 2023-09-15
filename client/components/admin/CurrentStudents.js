@@ -29,8 +29,12 @@ function CurrentStudents() {
                     authorization: `Bearer ${token}`,
                 },
             })
-            */
+            
             const response = await fetch(url, {
+                method: "GET",
+            });
+            */
+            const response = await fetch("/api/proxy/?route=api/students&method=GET", {
                 method: "GET",
             });
             const jsonData = await response.json();

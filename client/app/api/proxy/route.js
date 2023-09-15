@@ -21,6 +21,7 @@ export async function POST(req) {
     const { accessToken } = await getAccessToken(req, res);
     const path = req.nextUrl.searchParams.get("route");
     const body = await req.json();
+    
     return await fetch(`${EXTERNAL_API_URL}/${path}`, {
         method: "POST",
         headers: {
@@ -35,10 +36,24 @@ export async function PUT(req) {
     const res = new NextResponse();
     const { accessToken } = await getAccessToken(req, res);
     const path = req.nextUrl.searchParams.get("route");
-    const body = await req.json();
 
     return await fetch(`${EXTERNAL_API_URL}/${path}`, {
         method: "PUT",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+        }
+    });
+}
+
+export async function PATCH(req) {
+    const res = new NextResponse();
+    const { accessToken } = await getAccessToken(req, res);
+    const path = req.nextUrl.searchParams.get("route");
+    const body = await req.json();
+
+    return await fetch(`${EXTERNAL_API_URL}/${path}`, {
+        method: "PATCH",
         headers: {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
@@ -51,14 +66,12 @@ export async function DELETE(req) {
     const res = new NextResponse();
     const { accessToken } = await getAccessToken(req, res);
     const path = req.nextUrl.searchParams.get("route");
-    const body = await req.json();
 
     return await fetch(`${EXTERNAL_API_URL}/${path}`, {
         method: "DELETE",
         headers: {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
+        }
     });
 }

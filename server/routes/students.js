@@ -84,7 +84,7 @@ router.post("/student", async (req, res) => {
                         app_metadata: {
                             profile: {
                                 ...req.body.user[
-                                    "http://localhost:3000//app_metadata/profile"
+                                    "kwatt/app_metadata/profile"
                                 ],
                                 student_id: id,
                             },

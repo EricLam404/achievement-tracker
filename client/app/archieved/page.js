@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Back from "@/components/main/buttons/Back";
 import ErrorMessage from "@/components/main/ErrorMessage";
 import Loading from "@/components/main/Loading";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";

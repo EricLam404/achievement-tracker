@@ -10,8 +10,7 @@ const Page = () => {
     const [parentName, setParentName] = useState("test");
     const [parentDOB, setParentDOB] = useState("2000-06-24");
     const [phone, setPhone] = useState("111-111-1111");
-    const [childName, setChildName] = useState("test");
-    const [childDOB, setChildDOB] = useState("2000-06-24");
+    const [studentId, setStudentId] = useState("64408fb9d9715b43089a71a1");
 
     const { user, isLoading } = useUser();
 
@@ -22,10 +21,8 @@ const Page = () => {
             parent_name: parentName,
             parent_DOB: parentDOB,
             phone: phone,
-            child_name: childName,
-            child_DOB: childDOB,
+            student_id: studentId
         };
-        const token = await getAccessTokenSilently();
 
         fetch("http://localhost:5001/api/user/metadata", {
             method: "POST",
@@ -41,30 +38,9 @@ const Page = () => {
             .then((response) => response.text())
             .then((message) => {
                 let messageJSON = JSON.parse(message);
-                user["http://localhost:3000//user_metadata/profile"] =
+                user["kwatt/user_metadata/profile"] =
                     messageJSON.user_metadata.profile;
                 navigate("/");
-                fetch("http://localhost:5001/api/student/student", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        user: user,
-                        name: messageJSON.user_metadata.profile.child_name,
-                        dob: messageJSON.user_metadata.profile.child_DOB,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        authorization: `Bearer ${token}`,
-                    },
-                })
-                    .then((response) => response.text())
-                    .then((message) => {
-                        let messageJSON = JSON.parse(message);
-                        user["http://localhost:3000//app_metadata/profile"] =
-                            messageJSON.app_metadata.profile;
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
             })
             .catch((error) => {
                 console.error(error);
@@ -128,28 +104,13 @@ const Page = () => {
                                 htmlFor="childName"
                                 className="block font-medium mb-1"
                             >
-                                Child's Name
+                                Student Id
                             </label>
                             <input
                                 type="text"
                                 id="childName"
-                                value={childName}
-                                onChange={(e) => setChildName(e.target.value)}
-                                className="border border-gray-300 rounded px-3 py-2 w-full"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="childDOB"
-                                className="block font-medium mb-1"
-                            >
-                                Child's Date of Birth
-                            </label>
-                            <input
-                                type="date"
-                                id="childDOB"
-                                value={childDOB}
-                                onChange={(e) => setChildDOB(e.target.value)}
+                                value={studentId}
+                                onChange={(e) => setStudentId(e.target.value)}
                                 className="border border-gray-300 rounded px-3 py-2 w-full"
                             />
                         </div>

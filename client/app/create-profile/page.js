@@ -5,6 +5,7 @@ import ErrorMessage from "@/components/main/ErrorMessage";
 import Loading from "@/components/main/Loading";
 
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
     const [parentName, setParentName] = useState("test");
@@ -13,6 +14,7 @@ const Page = () => {
     const [studentId, setStudentId] = useState("64408fb9d9715b43089a71a1");
 
     const { user, isLoading } = useUser();
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,24 +25,23 @@ const Page = () => {
             phone: phone,
             student_id: studentId
         };
-
-        fetch("http://localhost:5001/api/user/metadata", {
+        const url = "api/users/metadata";
+        
+        fetch(`/api/proxy/?route=${url}`, {
             method: "POST",
-            body: JSON.stringify({
-                profile: profile,
-                user: user,
-            }),
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${token}`,
             },
+            body: JSON.stringify({
+                profile: profile,
+                user: user
+                }),
         })
             .then((response) => response.text())
             .then((message) => {
                 let messageJSON = JSON.parse(message);
-                user["kwatt/user_metadata/profile"] =
-                    messageJSON.user_metadata.profile;
-                navigate("/");
+                user["kwatt/user_metadata/profile"] = messageJSON.user_metadata.profile;
+                router.replace("/");
             })
             .catch((error) => {
                 console.error(error);

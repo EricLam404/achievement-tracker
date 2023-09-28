@@ -1,15 +1,10 @@
 const router = require("express").Router();
 var axios = require("axios").default;
-const Student = require("../models/student");
-
-router.get("/", function (req, res, next) {
-    res.render("home", { title: "user" });
-});
 
 router.post("/metadata", async (req, res) => {
     var managementAPI = {
         method: "POST",
-        url: "https://dev-x26mr5lwtu83zf7o.us.auth0.com/oauth/token",
+        url: `https://dev-x26mr5lwtu83zf7o.us.auth0.com/oauth/token`,
         headers: { "content-type": "application/x-www-form-urlencoded" },
         data: new URLSearchParams({
             grant_type: "client_credentials",
@@ -26,7 +21,7 @@ router.post("/metadata", async (req, res) => {
             var options = {
                 method: "PATCH",
                 url:
-                    "https://dev-x26mr5lwtu83zf7o.us.auth0.com/api/v2/users/" +
+                    `https://dev-x26mr5lwtu83zf7o.us.auth0.com/api/v2/users/` +
                     req.body.user.sub,
                 headers: {
                     authorization: "Bearer " + token,

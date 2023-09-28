@@ -8,11 +8,16 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 const Page = () => {
     const { user, isLoading } = useUser();
+    const profile = user["kwatt/user_metadata/profile"]
     return (
         <>
             {isLoading && <Loading />}
             {user && (
                 <>
+                    <div className="">Parent Name: {profile.parent_name}</div>
+                    <div className="">Parent birthday: {profile.parent_DOB}</div>
+                    <div className="">Phone Number: {profile.phone}</div>
+                    <div className="">Student ID: {profile.student_id}</div>
                     <a className="btn" href="/api/auth/logout">
                         Logout
                     </a>

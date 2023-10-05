@@ -16,16 +16,24 @@ const corsOptions = {
     origin: "http://localhost:3000",
 };
 
+const studentsRouter = require("./routes/students");
+const usersRouter = require("./routes/users");
+const publicRouter = require("./routes/public");
+
+const apiVersion = "/api"
+
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(jwtCheck);
 
-const apiRouter = require("./routes/api");
+app.use(`${apiVersion}/public`, publicRouter);
+
+app.use(jwtCheck);
 
 const mongoDB = process.env.DatabaseLogin;
 main();
 
-app.use("/api", apiRouter);
+app.use(`${apiVersion}/students`, studentsRouter);
+app.use(`${apiVersion}/users`, usersRouter);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {

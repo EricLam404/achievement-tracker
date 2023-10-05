@@ -1,7 +1,8 @@
 const router = require("express").Router();
 var axios = require("axios").default;
 
-router.post("/metadata", async (req, res) => {
+router.post("/metadata/:refresh_token", async (req, res) => {
+    const { refresh_token } = req.params;
     var managementAPI = {
         method: "POST",
         url: `https://dev-x26mr5lwtu83zf7o.us.auth0.com/oauth/token`,
@@ -18,7 +19,7 @@ router.post("/metadata", async (req, res) => {
         .request(managementAPI)
         .then(function (response) {
             const token = response.data.access_token;
-            var options = {
+            var updateMetadata = {
                 method: "PATCH",
                 url:
                     `https://dev-x26mr5lwtu83zf7o.us.auth0.com/api/v2/users/` +
@@ -31,17 +32,44 @@ router.post("/metadata", async (req, res) => {
             };
 
             axios
-                .request(options)
+                .request(updateMetadata)
                 .then(function (response) {
-                    res.json(response.data);
+                    var options = {
+                        method: "POST",
+                        url: "https://dev-x26mr5lwtu83zf7o.us.auth0.com/oauth/token",
+                        headers: { "content-type": "application/x-www-form-urlencoded" },
+                        data: new URLSearchParams({
+                            grant_type: "refresh_token",
+                            client_id: `${process.env.CLIENT_ID}`,
+                            client_secret: `${process.env.CLIENT_SECRET}`,
+                            refresh_token: `${refresh_token}`,
+                        }),
+                    };
+                
+                    axios
+                        .request(options)
+                        .then(function (response) {
+                            res.status(200).send(response.data);
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                            res.status(500).send({
+                                error: error,
+                            });
+                        });
                 })
                 .catch(function (error) {
                     console.error(error);
+                    res.status(500).send({
+                        error: error,
+                    });
                 });
         })
         .catch(function (error) {
             console.error(error);
+            res.status(500).send({
+                error: error,
+            });
         });
 });
-
 module.exports = router;

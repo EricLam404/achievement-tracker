@@ -27,11 +27,10 @@ app.use(express.json());
 
 app.use(`${apiVersion}/public`, publicRouter);
 
-app.use(jwtCheck);
-
 const mongoDB = process.env.DatabaseLogin;
 main();
 
+app.use(jwtCheck);
 app.use(`${apiVersion}/students`, studentsRouter);
 app.use(`${apiVersion}/users`, usersRouter);
 
@@ -45,6 +44,6 @@ async function main() {
         mongoose.connect(mongoDB);
         console.log("Database connected successfully!");
     } catch (err) {
-        console.log("Error connecting to database:", err);
+        console.log("Error connecting to the database:", err);
     }
 }

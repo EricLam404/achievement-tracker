@@ -14,16 +14,8 @@ const Page = () => {
 
     const fetchData = async () => {
         try {
-            const url = `http://localhost:5001/api/students/${studentId}`;
-            /* 
-            const token = await getAccessTokenSilently();
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    authorization: `Bearer ${token}`,
-                },
-            })
-            */
+            const url = `http://localhost:5001/api/public/students/${studentId}`;
+            console.log(url)
             const response = await fetch(url, {
                 method: "GET",
             });
@@ -88,6 +80,7 @@ const Page = () => {
                     </li>
                 ))}
             </ul>
+            
         </div>
     ) : (
         <div>Student not found</div>

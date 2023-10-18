@@ -5,7 +5,7 @@ import ErrorMessage from "@/components/main/ErrorMessage";
 import Loading from "@/components/main/Loading";
 
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const Page = () => {
     const [parentName, setParentName] = useState("test");
@@ -14,38 +14,37 @@ const Page = () => {
     const [studentId, setStudentId] = useState("64408fb9d9715b43089a71a1");
 
     const { user, isLoading } = useUser();
-    const router = useRouter();
+    console.log(user["kwatt/user_metadata/profile"])
+    if(Object.entries(user["kwatt/user_metadata/profile"]).length != 0) redirect('/')
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let profile = {
-            parent_name: parentName,
-            parent_DOB: parentDOB,
-            phone: phone,
-            student_id: studentId
-        };
-        const url = "api/users/metadata";
-        
-        fetch(`/api/proxy/?route=${url}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                profile: profile,
-                user: user
-                }),
-        })
-            .then((response) => response.text())
-            .then((message) => {
-                let messageJSON = JSON.parse(message);
-                user["kwatt/user_metadata/profile"] = messageJSON.user_metadata.profile;
-                router.replace("/");
+        try {
+            let profile = {
+                parent_name: parentName,
+                parent_DOB: parentDOB,
+                phone: phone,
+                student_id: studentId
+            };
+            const url = `/api/metadata`;
+            
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    profile: profile,
+                    user: user
+                    }),
             })
-            .catch((error) => {
-                console.error(error);
-            });
+            const message = await response.json();
+            console.log(message);
+
+        } catch(error){
+            console.log({error: error})
+        }
     };
 
     return (

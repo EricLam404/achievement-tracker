@@ -1,12 +1,12 @@
 'use client'
 
 import React from "react";
-import Home from "@/components/main/Home";
 import ErrorMessage from "@/components/main/ErrorMessage";
 import Loading from "@/components/main/Loading";
 
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import { redirect } from "next/navigation";
+import Students from "@/components/admin/Students";
 
 const Page = () => {
     const { user, isLoading } = useUser();
@@ -17,7 +17,7 @@ const Page = () => {
     return (
         <main>
             {user ? (
-                <Home />
+                <Students />
             ) : (
                 <a className="btn" href="/api/auth/login">
                     Login

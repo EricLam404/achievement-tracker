@@ -27,7 +27,7 @@ app.use(express.json());
 
 app.use(`${apiVersion}/public`, publicRouter);
 
-const mongoDB = process.env.DatabaseLogin;
+const mongoDB = process.env.DATABASE_LOGIN;
 main();
 
 app.use(jwtCheck);

@@ -16,15 +16,15 @@ const Page = () => {
             {isLoading && <Loading />}
             {user && (
                 <>
-                    <div className="">Parent Name: {profile.parent_name}</div>
-                    <div className="">
-                        Parent birthday: {profile.parent_DOB}
-                    </div>
-                    <div className="">Phone Number: {profile.phone}</div>
-                    <div className="">Student ID: {profile.student_id}</div>
-                    <a className="btn" href="/api/auth/logout">
+                    <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
+                    <div className="mb-4 text-xl">Parent Name: {profile.parent_name}</div>
+                    <div className="mb-4">Parent Birthday: {profile.parent_DOB}</div>
+                    <div className="mb-4">Phone Number: {profile.phone}</div>
+                    <div className="mb-4">Student ID: {profile.student_id}</div>
+                    <a className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded inline-block" href="/api/auth/logout">
                         Logout
                     </a>
+                    </div>
                 </>
             )}
         </>
